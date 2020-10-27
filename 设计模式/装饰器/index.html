@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #model {
+            height: 200px;
+            width: 200px;
+            line-height: 200px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #000;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 实现一个全局唯一的弹窗 -->
+    <button id="open">打开弹窗</button>
+    <button id="close">关闭弹窗</button>
+
+    <script>
+        const Model = (function () {
+            let Model = null
+            return function () {
+                if (!Model) {
+                    model = document.createElement('div')
+                    model.innerHTML = '您还未登录哦'
+                    model.id = 'model'
+                    model.style.display = 'none'
+                    document.body.appendChild(model)
+                }
+                return model
+            }
+        })()
+        function openModel(){
+            const model = new Model()
+            model.style.display = 'block'
+        }
+        function changeButtonText(){
+            const btn = document.getElementById('open')
+            btn.innerHTML = '快去登录'
+        }
+        function disableButton(){
+            const btn = document.getElementById('open')
+            btn.setAttribute('disabled',true)
+        }
+        function changeButtonStatus(){
+            changeButtonText()
+            disableButton()
+        }
+        document.getElementById('open').addEventListener('click', function () {
+            // const model = new Model()
+            // model.style.display = 'block'
+            openModel()
+            changeButtonStatus()
+        })
+        document.getElementById('close').addEventListener('click', function () {
+            const model = new Model()
+            model.style.display = 'none'
+            // document.getElementById('open').innerHTML = '快去登录'
+            // document.getElementById('open').style.borderColor = '#aaa'
+        })
+    </script>
+</body>
+
+</html>
