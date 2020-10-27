@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- key:value -->
+    <!-- weakMap: key 一定是对象 -->
+    <script>
+        // 弱引用
+        // 强引用
+        let obj = {
+            a = 'A'
+        }//有obj引用着，不会被销毁
+        // let wm = new WeakMap();
+        let wm = new Map();
+        wm.set(obj,'A')//这次引用不算数 垃圾回收 不会考虑weakMap里面的key是否引用外部对象
+        obj = null;
+        console.log(wm);//不在
+        function foo(){
+            let obj2 =  {}
+            wm.set(obj2,'B')
+        }
+        foo();
+        console.log(wm);
+        let map  = new Map()
+        map.set('2',2)//按照存的顺序
+        map.set('1',2)
+        let obj = {
+
+        }
+        obj['2'] = 2
+        obj['1'] = 1
+
+    </script>
+</body>
+</html>
