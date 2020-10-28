@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise基本语法</title>
+</head>
+<body>
+    <script>
+        //实例化Promise对象  ,可以改变实例的状态,p的状态
+        const p = new Promise(function(resolve,reject){
+            setTimeout(() => {
+                //
+                // let data = '数据库中的用户数据';
+                // resolve(data);
+
+                let err = '数据读取失败';
+                reject(err);
+            },1000)
+        });
+        //调用promise的then方法,then方法接收两个参数,两个参数都是函数类型的,成功的形参一般叫value,失败的形参一般叫reason
+        p.then(function(value){
+            console.log(value)
+        },function(reason){
+            console.log(reason)
+        })
+    </script>
+</body>
+</html>

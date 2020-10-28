@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代器</title>
+</head>
+<body>
+    <!-- 迭代器是一种接口，为各种不同的数据结构提供统一的访问机制，任何数据结构只要部署iterator接口，就可以完成遍历操作
+    1. es6创造了一种新的遍历命令for...of循环，iterator接口主要提供for...of消费
+    2. 原生具备iterator接口数据(可用for of 遍历)  比如Array Arguments等-->
+    <script>
+        // const xiyou  = ['唐僧','孙悟空','猪八戒','沙僧']
+        // for(let v of xiyou){
+        //     console.log(v)
+        // }
+        // console.log(xiyou)
+        // let iterator = xiyou[Symbol.iterator]();
+        // //调用对象next方法
+        // console.log(iterator.next());
+        // console.log(iterator.next());
+        // console.log(iterator.next());
+        // console.log(iterator.next());
+        // console.log(iterator.next());
+        // console.log(iterator)
+
+        const banji = {
+            name:'终极一班',
+            stus:[
+                'xioaming',
+                'xiaoning',
+                'xiaotian',
+                'knight'
+            ],
+            [Symbol.iterator](){
+                //索引变量
+                let index = 0;
+                let _this = this;
+                return {
+                    next:function(){
+                        if(index < _this.stus.length){
+                            const res =  {
+                            value: _this.stus[index],
+                            done:'false'
+                          }
+                          //下标自增
+                          index++;
+                          //返回结果
+                          return res;
+                        }else{
+                            return{value:undefined,done:true}
+                        }
+                        
+                    }
+                };
+            }
+        }
+        for(let v of banji){
+            console.log(v);
+        }
+    </script>
+</body>
+</html>
