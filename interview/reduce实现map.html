@@ -1,0 +1,26 @@
+<script>
+    // map [1,2].map(x => x+1)
+    // let res = []
+    // for(let i =0;i<len;i++) {res.push(fn(arr[i]))}
+    Array.prototype.myMap = function(fn){
+        let res = []
+        for(let i = 0 ;i<this.length;i++){
+            let item = this[i];
+            res.push(fn(item));
+        }
+        return res
+    }
+
+
+
+    Array.prototype.myMap1 = function(fn){
+        // 1.pre =[] next :1  =>[2]
+        //2:pre= [2] next:2 => [2,3]
+        //return pre => [2,3]
+        return this.reduce((pre,next) =>{
+            pre.push(fn(next));
+            return pre
+        },[])
+    }
+    [1,2].map(x => x+1)
+</script>
