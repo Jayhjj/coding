@@ -1,0 +1,59 @@
+<!-- js
+ 1.解析 URL 中的 queryString，返回一个对象 解析异常的 展示 ’‘
+ 返回值示例：
+ {
+   name: 'coder',
+   age: '20'.
+   callback: 'https://youzan.com?name=test',
+  list: [a, b],
+   json: {str: "abc", num: 123}, // json key 是固定
+   illegal: '', // error 异常
+ }
+
+const testURL = 'https://www.youzan.com?name=coder&age=20&callback=https%3A%2F%2Fyouzan.com%3Fname%3Dtest&list[]=a&list[]=b&json=%7B%22str%22%3A%22abc%22,%22num%22%3A123%7D&illegal=C%9E5%H__a100373__b4'; -->
+
+
+<!-- 先？截取    splice('&')  split('=')       decodeURLComponents()    解码失败值是''(null)     list[] 有[]说明是一个数组-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const testURL = 'https://www.youzan.com?name=coder&age=20&callback=https%3A%2F%2Fyouzan.com%3Fname%3Dtest&list[]=a&list[]=b&json=%7B%22str%22%3A%22abc%22,%22num%22%3A123%7D&illegal=C%9E5%H__a100373__b4';
+        function parse(url){
+            const i = url.indexOf('?')
+            if(i === -1) return {}
+            let qs = url.slice(i+1)
+            // console.log(qs)
+            let arr = qs.split('&')
+            let obj = {}
+            for(let kv of arr){
+                let k = kv.split('=')[0],v = kv.split('=')[1];
+                // obj[k] = v;
+                try{
+                    v = decodeURIComponent(v);
+                }
+                catch(error){
+                    v = '';
+                }
+                //数组
+                if(k.slice(-2) === '[]'){
+                    k = k.slice(0,-2);
+                    obj[k] ? obj[k].push(v) : obj[k] = [v];
+                    continue;
+                }
+                //非数组
+                obj[k] = v;
+            }
+            console.log(obj);
+            return obj;
+        }
+        parse(testURL)
+    </script>
+</body>
+</html>
