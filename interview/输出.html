@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function createTask(ms) {
+            return () => {
+                console.log('start', ms);
+                return new Promise(r => setTimeout(() => {
+                    console.log('end', ms);
+                    r(ms);
+                }, ms));
+            }
+        }
+        const tasks = Array(5).fill(null).map((_, i) => createTask(i * 1000));
+        Promise.all(tasks.map(task => task())).then(console.log);
+    </script>
+</body>
+
+</html>

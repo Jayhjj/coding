@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function MyPromise(fn){
+            let self = this;
+            this.value = undefined;
+            this.status = 'PENDING';
+            function onResolve(value){
+                // console.log(value);
+                self.status = 'FULFILLED';
+                self.value = value;
+                self.onFulFilled && self.onFulFilled(value);
+            }
+            function onReject(reason){}
+            fn(onResolve,onReject);
+        }
+        MyPromise.prototype.then = function(fn){
+            //r拿到的形参来自这里,通过this去拿
+            if(this.status === 'FULFILLED'){
+                fn(this.value);
+            }else if(this.status === 'PENDING'){
+                this.onFulFilled = fn;
+            }
+            
+        }
+        new MyPromise((reslove,reject)=> {
+            setTimeout(() => {
+                 reslove(1000);
+            },1000)
+           //改变状态的时候
+        })
+        .then(r => {
+            console.log(r)
+        })
+        //.then(function(r){
+
+        //})
+    </script>
+</body>
+</html>
