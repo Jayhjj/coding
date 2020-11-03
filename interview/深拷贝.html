@@ -1,0 +1,14 @@
+<script>
+    function deepCopy(o){
+        let obj = {};
+        for(let k in o){
+            //if(!o.hasOwn)
+            if(typeof o[k] !== 'object'){
+                obj[k] = o[k];
+            }else{
+                obj[k] = deepCopy(o[k]);
+            }
+        }
+    }
+    return obj;
+</script>
