@@ -1,11 +1,22 @@
-import {createElement,render,renderDom} from './element'
+import {createElement,render,renderDom} from './element';
+import diff from './diff';
+import patch from'./patch';
 let virtualDom1 = createElement('ul',{class:'list'},[
     createElement('li',{class:'item'},['1']),
-    createElement('li',{class:'item'},['2'])
+    createElement('li',{class:'item'},['2']),
+    createElement('li',{class:'item'},['3'])
 ])
-let el = render(virtualDom1)
 
-renderDom(el,document.getElementById('app'))
+let virtualDom2 = createElement('ul',{class:'list-group',id:'group'},[
+    createElement('li',{class:'item'},['a'])
+])
+
+let el = render(virtualDom1);
+
+renderDom(el,document.getElementById('app'));
+let patches = diff(virtualDom1,virtualDom2)//补丁
+//
+patches(el,patches)
 console.log(el)
 
 
