@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        实现create
+        function create(o){
+            let obj= {};
+            // obj.__proto__ = o;
+            Object,setPrototypeOf(obj,o);
+            return obj
+        }
+        Cat.prototype = Object.create(Animal)
+
+        // console.log(window.a)
+
+
+        // try {
+        //     new Promise((resolve) => {//promise内部错误捕获不到
+        //         window.a.b
+        //     })
+        //     .catch()
+        // } catch (e) {
+        //     console.log(e)
+        // }
+
+        // try {
+        //     setTimeout(() => {
+        //         console.log(window.a.b)
+        //     }, 1000)
+        // } catch (e) {
+        //     console.log(e)
+        // }
+    </script>
+</body>
+
+</html>
