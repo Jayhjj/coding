@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* .wrap{
+        display: flex;
+    }
+
+    .left{
+        order: -1;
+    } */
+    .wrap {
+        overflow: hidden;
+    }
+
+    .wrap>div {
+        float: left;
+    }
+
+    .center {
+        width: 100%;
+        /* background-color: blue; */
+        text-align: center;
+
+    }
+
+    .left {
+        width: 50px;
+        margin-left: -100%;
+        /* position: absolute; */
+    }
+
+    .right {
+        width: 50px;
+        /* position: absolute; */
+        /* padding-left: 100%; */
+        margin-left: -50px;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="center">center</div>
+        <div class="right">right</div>
+        <div class="left">left</div>
+    </div>
+
+
+
+
+    <script>
+        function Foo() {
+            getName = function () {
+                console.log(1)
+            }
+            return this;
+        }
+        Foo.getName = function () {
+            console.log(2)
+        }
+        Foo.prototype.getName = function () {
+            console.log(3)
+        }
+        var getName = function () {
+            console.log(4)
+        }
+        function getName() {
+            console.log(5)
+        }
+        // ouput:
+        Foo.getName();
+        getName();
+        Foo().getName();
+        getName();
+        new Foo.getName();
+        new Foo().getName();
+        new new Foo().getName();
+
+    </script>
+</body>
+
+</html>
