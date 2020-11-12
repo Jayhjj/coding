@@ -1,0 +1,27 @@
+<!-- 实现一个方法 function resolve(baseUrl: string, moduleId: string): string {}
+resolve('http://www.baidu.com', 'a/b/c'); 
+简化为-> http://www.baidu.com/a/b/c
+resolve('http://www.baidu.com', 'a/../c'); 
+简化为-> http://www.baidu.com/c
+resolve('http://www.baidu.com/1/2', 'a/.././c'); 
+简化为-> http://www.baidu.com/1/2/c -->
+<script>
+    var simplifyPath = function(path) {
+    // a//b/
+    let str = path.split('/');
+    let stack = [];
+    for(let p of str){
+        if(p === '..'){
+            stack.pop();
+        }else if(!['.',''].includes(p)){
+            stack.push(p);
+        }
+    }
+    return '/' + stack.join('/')
+};
+</script>
+
+<div>
+    <div id="app"></div>
+</div>
+<!-- 后进来的 元素怎么绑定事件:事件代理 ，绑定在父容器上面-->
