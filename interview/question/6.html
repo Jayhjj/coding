@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* important > 内联 > id > class = 伪类 = 属性 > 标签 = 伪元素 > 通配符(*) > 继承*/
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div id="wrap">
+            <p>
+                <span class="title" id="contend"> hello world</span>
+            </p>
+        </div>
+    </div>
+
+
+
+    <script>
+        //下面三种方式实现继承的优缺点
+        // function Shape(){
+        //     this.info = {
+        //         age:18
+        //     }
+        // }
+        // function Rect(name){
+        //     this.name = name
+        // }
+        // Rect.prototype = new Shape()
+        // let rect = new Rect('wn');
+        // rect.info = {age:20};
+        //缺点，继承父类的引用类型可以被修改
+
+            // 下面三种方式实现的继承的优缺点，并改进
+Shape.prototype.say = function() {
+  console.log('hhhh');
+}
+function Shape() {
+  this.info = {
+    age: 18
+  }
+}
+
+function Rect(name) {
+  this.name = name
+}
+
+// 1
+// Rect.prototype = new Shape()
+// let rect = new Rect('wn')  // { info: {} }
+// rect.info.age = 20
+// console.log(rect.info.age);
+
+// 2
+// Rect.prototype = Shape.prototype  // 子类原型添加方法父类也会修改
+// let rect = new Rect('wn')
+// Rect.prototype.sex = 'man'
+// console.log(Shape.prototype.sex);
+
+// 3
+Rect.prototype = Object.create(Shape.prototype)
+let rect = new Rect('wn')
+Rect.prototype.sex = 'man'
+console.log(Shape.prototype.sex);
+
+
+
+
+    </script>
+</body>
+</html>
