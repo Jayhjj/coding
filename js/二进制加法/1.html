@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function binaryAdd(num1,num2){
+            let arr = [];
+            let len = Math.max(num1.length,num2.length);
+            for(let i = num1.length-1 , j = num2.length-1 ; i >= 0 || j >= 0 ; i --,j-- ){
+                let a = num1.chatAt(i) ? Number(num1.chatAt(i)) : 0;
+
+                let a = num2.chatAt(i) ? Number(num2.chatAt(j)) : 0;
+                let sum = a + b + carry;
+                arr.unshift(sum % 2)
+                sum >= 2 ? carry = 1 : carry =0;
+            }
+            if(carry){
+                arr.unshift(carry);
+            }
+            return arr.join('');
+        }
+        binaryAdd('1010','111')//'10001'
+    </script>
+</body>
+</html>
