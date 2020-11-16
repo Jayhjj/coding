@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content"
+    style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;">
+    </div>
+    <!-- 防抖（debounce）
+所谓防抖，就是指触发事件后 n 秒后才执行函数，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。 -->
+    <script>
+        let num = 1;
+        const content = document.getElementById('content');
+        function count(){
+            content.innerHTML = num++;
+        }
+        function debounce(func,wait){
+            let timeout ;
+            return function(){
+                const content = this;
+                const args = [...arguments];
+                if(timeout) clearTimeout(timeout);
+                const callNow = !timeout;
+                timeout = setTimeout(() => {
+                    // func.apply(content,args);
+                    timeout = null;
+                },wait)
+                if (callNow) func.apply(content, args)
+            }
+
+        }
+        content.onmousemove = debounce(count,1000);
+    </script>
+
+</body>
+</html>

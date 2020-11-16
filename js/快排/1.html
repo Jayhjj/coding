@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function qiuckSort(arr,i,j){
+            if(i >= j) return;
+            let left = i ;
+            let right = j; 
+            let privt = arr[left];
+            while(left < right){
+                while(arr[right] >= privt && left < right){
+                    right --;
+                }
+                arr[left] = arr[right];
+                while(arr[left] <= privt && left < right){
+                    left ++ ;
+                }
+                arr[right] = arr[left]
+            }
+            arr[left] = privt;
+            qiuckSort(arr,i,left -1);
+            qiuckSort(arr,left + 1,j);
+            return arr;
+        }
+        let arr = [5,4,3,8,9,-1,1,2,-3,-2];
+        console.log(qiuckSort(arr,0,arr.length-1));
+        console.log(arr);
+    </script>
+</body>
+</html>
