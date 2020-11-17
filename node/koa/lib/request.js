@@ -1,0 +1,16 @@
+let url = require('url');//node 内置模块
+
+let request = {
+    get url(){//
+        console.log(this);
+        return this.req.url
+    },
+    get path(){
+        return url.parse(this.req.url).pathname
+    },
+    get query(){
+        return url.parse(this.req.url).query
+    }
+
+}
+module.exports = request
