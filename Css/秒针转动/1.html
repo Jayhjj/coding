@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .second{
+            width: 1px;
+            height: 100px;
+            animation: second 60s infinite;
+            background-color: blue;
+            transform-origin: bottom center;
+        }
+        @keyframes second {
+            to{
+                transform: rotate(360deg);
+            } 
+        }
+    </style>
+<body>
+    <div class="second">
+
+    </div>
+</body>
+</html>
