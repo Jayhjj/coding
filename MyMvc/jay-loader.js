@@ -33,7 +33,11 @@ function initRouter(app) {
 
       // 注册路由
       // router.get('/', ctx => {})
-      router[method](path ==='/' ? prefix : prefix + path, routes[key])
+      // router[method](path ==='/' ? prefix : prefix + path, routes[key])
+      router[method](path ==='/' ? prefix : prefix + path, async ctx => {
+        app.ctx = ctx;
+        await routes[key](app);
+      })
     })
   })
   return router
@@ -47,11 +51,31 @@ function initController(app){
   return controllers
 }
 
+function initService(app){
+  const services = {}
+  load('service',(filename,service) => {
+    services[filename] = service
+  })
+  return services
+}
+
+const Sequelize = require('sequelize')
+function loadConfig(app) {
+  load('config',(filename,conf) => {
+    if(conf.db){
+      app.$db = new Sequelize(conf.db)
+      app.$model = {}
+      load('model',(filename,{schema,options}))
+    }
+  })
+}
+
 
 
 module.exports = {
   initRouter,
-  initController
+  initController,
+  initService
 }
 
 // load('./routes', (filename, file) => {

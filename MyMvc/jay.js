@@ -1,10 +1,11 @@
 const Koa = require('koa')
-const {initRouter,initController} = require('./jay-loader')
+const {initRouter,initController,initService} = require('./jay-loader')
 
 class jay {
     constructor(conf){
         this.$app = new Koa(conf)
         this.$ctrl = initController(this)
+        this.$service = initService()
         this.$router = initRouter(this)
         this.$app.use(this.$router.routes())
     }
