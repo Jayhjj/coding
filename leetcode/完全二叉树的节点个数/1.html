@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+ var countNodes = function(root) {
+            if(root == null){
+                return 0;
+            }
+            let leftH = 0;
+            let rightH = 0;
+            let leftNode,rightNode = root;
+            while(leftNode){
+                leftH ++;
+                leftNode = leftNode.left;
+            }
+            while(rightNode){
+                rightH ++;
+                rightNode = rightNode.right
+            }
+            if(leftH === rightH){
+                return 2 ** leftH -1
+            }
+            return 1 + countNodes(root.left) + countNodes(root.right);
+
+    };
+
+
+
+   
+
+    </script>
+</body>
+</html>
