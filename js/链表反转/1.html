@@ -30,12 +30,12 @@
                 let next = current.next
                 current.next = pre
 
-                per = current;
+                pre = current;
 
                 current = next;
 
             }
-            return per
+            return pre
         }
         reverseLinkList(node1);
     </script>
