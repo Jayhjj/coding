@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var isSameTree = function(p, q) {
+            let same = true;
+            function walk(node,node1){
+                if((node && node1 && node !== node1)|| (!node) || (!node1)){
+                    same = false;
+                    return
+                }   
+                if(node && node){
+                     walk(node.left,node1.left);
+                    walk(node.right,node1.right)
+                }
+                
+            }
+            walk(p,q)
+            return same;
+        }
+    </script>
+</body>
+</html>

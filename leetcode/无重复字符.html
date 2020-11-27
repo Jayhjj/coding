@@ -7,18 +7,35 @@
 </head>
 <body>
     <script>
+        // var lengthOfLongestSubstring  = function(s){
+        //     let arr = [] ,max =0;
+        //     for(let i = 0;i<s.length;i++){
+        //         let index = arr.indexOf(s[i]);
+        //         if(index !== -1){
+        //             arr.splice(0,index+1);
+        //         }
+        //         arr.push(s.charAt(i))
+        //         max = Math.max(arr.length,max);
+        //     }
+        //     return max;
+        // }
+
+
+
         var lengthOfLongestSubstring  = function(s){
-            let arr = [] ,max =0;
-            for(let i = 0;i<s.length;i++){
-                let index = arr.indexOf(s[i]);
-                if(index !== -1){
-                    arr.slice(0,index+1);
-                }
-                arr.push(s.charAt(i))
-                max = Math.max(arr.length,max);
-            }
-            return max;
-        }   
+           let arr = [];
+           let max = 0
+           for(i = 0;i<s.length;i++){
+               let index = arr.indeOf(s[i])
+               if( index !== -1){
+                    arr.splice(0,index+1)
+               }
+               arr.push(s.charAt(i))
+               max = Math.max(arr.length,max);
+           }
+           return max;
+        }  
+
     </script>
 </body>
 </html>
