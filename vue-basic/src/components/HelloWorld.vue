@@ -31,13 +31,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue';//为了服务ts存在的
 
 export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: String,
   },
+  setup(props,context){
+    props.msg
+  }
 });
 </script>
 

@@ -6,7 +6,7 @@
   <h1>{{greetings}}</h1>
   <h1>X:{{x}} Y:{{y}}</h1>
   <h1 v-if="loading"> Loading....</h1>
-  <img v-if="loaded"  src="result.message">
+  <img v-if="loaded"  :src="result.message">
   <!-- <ul>
     <li v-for="number in numbers" :key="number">
       <h1>{{number}}</h1>
@@ -30,6 +30,16 @@ interface DataProps{
   increase: () => void;
  
 }
+interface DogResult{
+  message:string;
+  status:string;
+}
+interface CatResult{
+  id:string;
+  url:string;
+  width:number;
+  height:number;
+}
 export default{
   name: 'App',
   setup(){
@@ -51,7 +61,14 @@ export default{
       greetings.value += 'Hello!'
     }
     const { x , y } = useMousePosition()
-    const {result,loaded,loading} = useURLLoader('https://dog.ceo/api/breeds/image/random')
+    const {result,loaded,loading} = useURLLoader<DogResult>('https://dog.ceo/api/breeds/image/random')
+    
+    
+    watch(result,() => {
+      if(result.value){
+        console.log('value',result.value.message);
+      }
+    })
     // const x = ref(0);
     // const y = ref(0);
     // const updateMouse = (e:MouseEvent) => {
