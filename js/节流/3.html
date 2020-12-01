@@ -1,0 +1,18 @@
+<script>
+    function throtter(fn, wait) {
+        var pre = 0
+        return function () {
+
+            let content = this
+            let args = arguments
+            let now = Date.now()
+            if (now - pre > wait) {
+
+                fn.apply(content, args)
+                pre = now;
+
+            }
+        }
+
+    }
+</script>

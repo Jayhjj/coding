@@ -17,20 +17,20 @@
             content.innerHTML = num++;
         }
         //时间戳版
-        // function throttle(func,wait){
-        //     var pre = 0;
-        //     return function(){
-        //         let now =  Date.now();
-        //         let content = this;
-        //         // console.log(this);
-        //         let args = arguments;
-        //         if(now - pre > wait){
-        //             func.apply(content,args)
-        //             pre = now;
-        //         }
-        //     }
-        // }
-       
+        function throttle(func,wait){
+            var pre = 0;
+            return function(){
+                let now =  Date.now();
+                let content = this;
+                // console.log(this);
+                let args = arguments;
+                if(now - pre > wait){
+                    func.apply(content,args)
+                    pre = now;
+                }
+            }
+        }
+        content.onmousemove = throttle(count,1000);
 
         //定时器版本
         function throttle(func,wait){

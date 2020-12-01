@@ -29,6 +29,9 @@
                     // 实现一个递归拷贝
                     cloneObj[key] = deepClone(obj[key]);
                 }
+                else{
+                    cloneObj[key] = obj[key];
+                }
             }
             return cloneObj;
         }

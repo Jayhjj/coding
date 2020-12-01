@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //广度优先遍历
+        let c = {
+            a:1,
+            b:{
+                c:{
+                    d:2
+                }
+            }
+        }
+        function deepClone(obj){
+            let queue = [],res = {}
+            Object.keys(obj).forEach(k => {
+                queue.push({
+                    key:k,
+                    value:obj[k],
+                    parent:res
+                })
+            })
+            while(queue.length){
+                let node = queue.shift();
+                let {key,value,parent} = node;
+                if(typeof value === 'object'){
+                    if(!parent[key]) parent[key] = {};//生成一个新对象
+                    Object.keys(value).forEach(k => {
+                        queue.push({
+                            key:k,
+                            value:value[k],
+                            parent:parent[key]
+                        })
+                    })
+                }else{
+                    parent[key] = value;
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

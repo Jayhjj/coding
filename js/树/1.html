@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //转换
+
+//     const obj = {
+//     label: "c",
+//     value: 3,
+//     children: [
+//       { label: "a", value: 1 },
+//       {
+//         label: "b", value: 2,
+//         children: [
+//           {
+//             label: 'c', value: -1
+//           }
+//         ]
+//       },
+//     ],
+//   };
+
+//   let data = [
+//     { label: 'a', value: 1, parentValue: 3 },
+//     { label: 'b', value: 2, parentValue: 3 },
+//     { label: 'c', value: 3 },
+//   ]
+
+
+    function convert(tree){
+        let data = [],res
+        function walk(node,parentNode){
+            let t = {lable:node.lable,value:node.value}
+            if(parentNode){
+                t.parentValue = parentNode
+            } 
+            res.push(t);
+            if(node.children){
+               
+                for(let child of node.children){
+                    walk(child,node);
+                }
+
+            }
+        }
+        walk(tree);
+        return res;
+    }
+
+
+    //重建树
+
+    function bulidTree(arr){
+        let tree = arr.shift();
+        function insertByValue(value,node){
+            walk(tree);
+           function walk(n){
+               if(n.value === value){
+                   if(!n.children){
+                       n.children = [];
+                   }
+                   n.children.push(node)
+               }
+               if(n.children){
+                   for(let child of n.children){
+                       walk(child);
+                   }
+               }
+           }
+        }
+        for(let node of arr){
+            insertByValue(node.parentValue,node)
+        }
+        return tree;
+
+    }
+    </script>
+</body>
+
+</html>

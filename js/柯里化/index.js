@@ -7,27 +7,27 @@
 
 
 
-// function currying(fn){
-//     var allArgs = [];  
+function currying(fn){
+    var allArgs = [];  
 
-//     return function next(){
-//         var args = [].slice.call(arguments);  //args被引用
+    return function next(){
+        var args = [].slice.call(arguments);  //args被引用
 
-//         if(args.length > 0){
-//             allArgs = allArgs.concat(args);
-//             return next;
-//         }else{
-//             return fn.apply(null, allArgs);
-//         }
-//     } 
-// }
-// var add = currying(function(){//指向了next方法
-//     var sum = 0;
-//     for(var i = 0; i < arguments.length; i++){
-//         sum += arguments[i];
-//     }
-//     return sum;
-// });
+        if(args.length > 0){
+            allArgs = allArgs.concat(args);
+            return next;
+        }else{
+            return fn.apply(null, allArgs);
+        }
+    } 
+}
+var add = currying(function(){//指向了next方法
+    var sum = 0;
+    for(var i = 0; i < arguments.length; i++){
+        sum += arguments[i];
+    }
+    return sum;
+});
 
 
 
@@ -46,7 +46,7 @@ function curry(fn) {
 }
 let sum = (a, b, c) => a + b + c;
 let fun = curry(sum)
-consloe.log(fn(1)(2)(3))
+consloe.log(fun(1)(2)(3))
 
 // 手写一个函数的柯里化，实现下面功能：
 // add(2,3,4).sumOf()
