@@ -27,17 +27,20 @@ export default defineComponent({
   props: {
     list: {
       type: Array as PropType<ColumnProps[]>,
-      require: true
+      required: true
     }
   },
   setup(props) {
+    const lists = props.list
       const columnList = computed(() => {
-          return props.list.map(column => {
-              if(!column.avatar){
-                  column.avatar = require('@/assets/logo.png')
+          if (lists) {
+            return lists.map(column => {
+              if(column && !column.avatar){
+                  column.avatar = require('@/assets/store.png')
               }
               return column
           })
+          }
       })
       return{
         columnList
