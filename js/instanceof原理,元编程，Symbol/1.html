@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class MyArray {
+            static[Symbol.hasInstance] = function(){
+            return true
+            }
+        }
+        let arr = new MyArray()
+        console.log([] instanceof MyArray)
+        //1:[Symbol.hasInstance] 有? 函数的返回值
+        //2. 没有[Symbol.hasInstance] 查找左边的原型链  obj._proto_ = MyArray.prototype
+
+
+
+        // 基本数据类型
+        Symbol.toPrimitive  
+        //这个可以转为基本数据类型
+
+        let obj = {
+            [Symbol.toPrimitive]:() => {
+                return '{}'
+            }
+        };
+        console.log('{}' == obj);
+    </script>
+</body>
+</html>

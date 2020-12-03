@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function clac(n){
+            let res = [];
+            function walk(num,n = 2){
+                if(num === n){
+                    res.push(n);
+                    return;
+                }
+                if(num % n === 0){
+                    res.push(n);
+                    walk(num/n,n);
+                }else{
+                    walk(num,n + 1)
+                }
+            }
+            walk(n);
+            return res
+        }
+    </script>
+</body>
+</html>

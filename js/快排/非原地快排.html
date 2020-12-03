@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function quickSort(arr){
+            let p = arr[0],left = [],right = [];
+            if(arr.length <= 1) return 
+            for(let i = 0 ;i < arr.length ;i++){
+                let num = arr[i]
+                if(num > p){
+                    right.push(num)
+                }else{
+                    left.push(num);
+                }
+            }
+            let l = quickSort(left);
+            let r= quickSort(right);
+            return [...l,p,...r];
+        }
+    </script>
+</body>
+</html>

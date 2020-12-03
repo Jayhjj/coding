@@ -1,0 +1,15 @@
+<script>
+    function calc(n){
+        let num = n,p = 2,res = [];
+        while(num !== p){
+            if(num % p === 0){
+                res.push(p);
+                num = num/p;
+            }else{
+                p++;
+            }
+        }
+        res.push(p);
+        return res;
+    }
+</script>
