@@ -1,19 +1,7 @@
-# zhihu
+## 项目可以叙述的点
 
-## Project setup
-```
-yarn install
-```
+- 自定义dropdwon下拉组件，通过Dropdown 和 DropdownItem 组件完成下拉功能，并通过自定义hooks函数
+  可以在点击该按钮以外的区域把隐藏菜单栏收起来
+  # !dropdownRef.value.contains(e.target as HTMLElement) 去判断元素是否包含在页面上，从而控制点击事件完成后，下拉菜单是否收起
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 表单功能的封装
