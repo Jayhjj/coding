@@ -3,6 +3,13 @@
     <gobal-header :user="currentUser"></gobal-header>
     <!-- <column-list :list="list"></column-list> -->
     <form action>
+    <div class="mb-3">
+        <label class="form-label">邮箱地址</label>
+        <vaildate-input :rules="emailRules"></vaildate-input> 
+        <!-- 给 ValidateInput组件的rules数组传值 -->
+    </div>
+    </form>
+    <!-- <form action>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
         <input 
@@ -16,7 +23,7 @@
         <label for="exampleInputPassword1" class="form-label">密码</label>
         <input type="password" class="form-control" id="exampleInputPassword1" />
       </div>
-    </form>
+    </form> -->
   </div>
 </template>
 
@@ -25,11 +32,12 @@ import { defineComponent,reactive } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import ColumnList, { ColumnProps } from "./components/ColumnList.vue";
 import GobalHeader, { UserProps } from "./components/GlobalHeader.vue";
-
+import VaildateInput ,{ RulesProp } from './components/ValidateInput.vue'
 const currentUser: UserProps = {
   isLogin: true,
   name: "jay"
 };
+
 // const testData: ColumnProps[] = [
 //   {
 //     id: 1,
@@ -66,36 +74,41 @@ const currentUser: UserProps = {
 //     description: "这里是test6专栏，一段非常有意思的简介"
 //   }
 // ];
-const emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+// const emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 export default defineComponent({
   name: "App",
 
   components: {
     //  ColumnList,
-    GobalHeader
+    GobalHeader,
+    VaildateInput
   },
   setup() {
-    const emailRef = reactive({
-      val:'',
-      error:false,
-      message:''
-    })
-    const vaildateEmail = () => {
+    const emailRules: RulesProp = [
+      {type: 'require' ,message: '电子邮件地址不能为空'},
+      {type: 'email' ,message: '请输入正确的电子邮箱格式'}
+    ]
+    // const emailRef = reactive({
+    //   val:'',
+    //   error:false,
+    //   message:''
+    // })
+    // const vaildateEmail = () => {
      
-      if(emailRef.val.trim() === ''){
-        emailRef.error = true
-        emailRef.message = 'can not empty'
-      }else if(!emailReg.test(emailRef.val)){
-        emailRef.error = true
-        emailRef.message = 'should be vaild message'
-      }
-    }
+    //   if(emailRef.val.trim() === ''){
+    //     emailRef.error = true
+    //     emailRef.message = 'can not empty'
+    //   }else if(!emailReg.test(emailRef.val)){
+    //     emailRef.error = true
+    //     emailRef.message = 'should be vaild message'
+    //   }
+    // }
     return {
       // list: testData,
       currentUser,
-      emailRef,
-      vaildateEmail
-
+      // emailRef,
+      // vaildateEmail
+      emailRules
     };
   }
 });
