@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+       function quickSort(arr){
+            let p = arr[0],left = [],right = [];
+            if(arr.length <= 1) return arr
+            for(let i = 1 ;i < arr.length ;i++){
+                let num = arr[i]
+                if(num > p){
+                    right.push(num)
+                }else{
+                    left.push(num)
+                }
+            }
+            let l = quickSort(left);
+            let r = quickSort(right);
+            return [...l,p,...r];
+        }
+        let arr1 = quickSort([1,3,5,7,2,4,6,8]);
+        console.log(arr1);
+        var smallestK = function (arr, k) {
+            return arr1.splice(0, k)
+        };
+        console.log(smallestK(arr1, 4));
+
+
+
+
+    </script>
+</body>
+
+</html>
