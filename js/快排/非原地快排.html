@@ -9,19 +9,21 @@
     <script>
         function quickSort(arr){
             let p = arr[0],left = [],right = [];
-            if(arr.length <= 1) return 
-            for(let i = 0 ;i < arr.length ;i++){
+            if(arr.length <= 1) return arr
+            for(let i = 1 ;i < arr.length ;i++){
                 let num = arr[i]
                 if(num > p){
                     right.push(num)
                 }else{
-                    left.push(num);
+                    left.push(num)
                 }
             }
             let l = quickSort(left);
-            let r= quickSort(right);
+            let r = quickSort(right);
             return [...l,p,...r];
         }
+        let arr1 = quickSort([1,6,4,5,2,8,9]);
+        console.log(arr1);
     </script>
 </body>
 </html>

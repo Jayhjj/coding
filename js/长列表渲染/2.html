@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟列表</title>
+</head>
+<style>
+    #wrap{
+        height: 100vh;
+        overflow: auto;
+    }
+</style>
+<body>
+    <div id="wrap">
+        <div style="height: 10000px;"></div>
+        <!-- 100条数据:能在视窗之内被用户看到内容 -->
+        <div id="list"></div>
+    </div>
+    <script>
+        let d = [];
+        for(let i = 0 ; i < 1000 ; i++){
+            d.push({value: i})
+        }
+        let itemSize = 100; //li的高度
+        const wrap = document.getElementById('wrap');
+        const list = document.getElementById('list');
+        const onScroll = () => {
+            const scrollTop = wrap.scrollTop;
+            const start = Math.floor(scrollTop / 100);//下
+            const visableCount = Math.ceil(window.innerHeight / 100);//上
+            const end = start + visableCount;
+            const data = d.slice(start,end >= d.length ? d.length : end);
+            list.innerHTML = data.map(x => {
+            return `<li>${x.value}</li>`
+            }).join('');
+        }
+        
+        onScroll();
+        wrap.addEventListener('scroll',onScroll);
+     
+    </script>
+</body>
+</html>

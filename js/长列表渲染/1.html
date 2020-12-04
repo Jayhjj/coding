@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="list"></div>
+    <script>
+        // const list = document.getElementById('list');
+        // for(let i = 0 ; i < 10000; i++){
+        //     const li = document.createElement('li');
+        //     li.textContent = i;
+        //     list.appendChild(li);
+        // }
+
+        work()
+        function work(){
+            let i = 0
+            if(i>=100) return
+            i++;
+            for(let i = 0 ; i < 100 ; i++){
+                
+               
+                 const li = document.createElement('li');
+                 li.textContent = i;
+                 list.appendChild(li);
+            }
+            setTimeout(() => {
+                work()
+            },16)
+        }
+      
+        
+    </script>
+</body>
+</html>
