@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 20px;height: 20px;background-color: red;
+    }
+    img {
+      width: 500px;
+      height: 400px;
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div style="height: 1000px;"></div>
+  <div class="box"></div>
+  <div class="box1"></div> -->
+  <img src="" alt="" data-src="http://img.alicdn.com/imgextra/i3/22/O1CN01pUGeeO1C27LzpImez_!!22-0-luban.jpg" />
+  <img src="" alt="" data-src="https://img.alicdn.com/simba/img/TB10wzobQ9l0K4jSZFKSutFjpXa.jpg" />
+  <img src="" alt="" data-src="https://gw.alicdn.com/imgextra/i2/1725301/O1CN012wNXQ91p1uBVWXm5x_!!1725301-0-lubanu.jpg" />
+  <img src="" alt="" data-src="https://img.alicdn.com/simba/img/TB1N4t3mj39YK4jSZPcSutrUFXa.jpg" />
+  <img src="" alt="" data-src="https://aecpm.alicdn.com/simba/img/TB12NW9kH1YBuNjSszhSuwUsFXa.jpg" />
+  <script>
+    const lis = document.querySelectorAll('img');
+    let ob = new  IntersectionObserver((list) => {
+      // list[0] list[2] list[3] list[4] list[1]
+      list.forEach(li => {
+        if (li.isIntersecting) {
+          let url = li.target.dataset.src;
+          li.target.src = url;
+          console.log('出现了');
+          ob.unobserve(li.target);
+        }
+      })
+    })
+    lis.forEach(li => {
+      ob.observe(li);
+    })
+  </script>
+</body>
+</html>

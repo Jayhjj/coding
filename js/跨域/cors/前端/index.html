@@ -1,0 +1,16 @@
+<script>
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true
+    xhr.open("POST","http://127.0.0.1:9090/",true);
+    let user = {
+        name:'name',
+        pwd:'pwd'
+    }
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.onload = function(){
+        console.log(xhr.response);
+        console.log(xhr.getAllResponseHeaders());
+    }
+    xhr.send(JSON.stringify(user));
+   
+</script>
