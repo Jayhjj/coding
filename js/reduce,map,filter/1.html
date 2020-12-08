@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Array.prototype.myReduce = function(cb, defaultVal) {
+      let totalNum = defaultVal || this[0];
+      for (let i = defaultVal ? 0 : 1; i < this.length; i ++) {
+        let num = this[i];
+        totalNum = cb(totalNum, num);
+      }
+      return totalNum;
+    }
+    // 用 reduce 实现 map
+    Array.prototype.myMap = function(cb) {
+      // let t = []
+      // for (let i = 0; i < this.length; i ++) {
+      //   let num = this[i];
+      //   t.push(cb(num));
+      // }
+      // return t;
+      return this.reduce((pre, current) => {
+        return pre.concat(cb(current))
+      }, [])
+    }
+    Array.prototype.myMap = function(cb) {
+      let t = []
+      for (let i = 0; i < this.length; i ++) {
+        let num = this[i];
+        cb(num) && t.push(num);
+      }
+      return t;
+    }
+    let arr = [9, 1, 2, 3];
+    // [] .concat   11   =>  [11]
+    // [11] .concat 3    =>  [11, 3]
+    // [11, 3]
+    arr.map(x => x + 2)
+    arr.filter(x => x >= 2)
+    // 0 + 0 => 0
+    // 0 + 1 => 1
+    // 1 + 2 => 3
+    // 3 + 4 => 7
+    const sum = arr.myReduce((a, b) => a + b, 0);
+    console.log(sum)
+    // 
+  </script>
+</body>
+</html>
