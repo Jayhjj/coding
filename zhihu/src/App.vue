@@ -5,7 +5,18 @@
     <form action>
     <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <vaildate-input :rules="emailRules"></vaildate-input> 
+        <vaildate-input :rules="emailRules" v-model="emailVal" 
+        placeholder="请输入邮箱地址" 
+        type = 'text'>
+          </vaildate-input> 
+        <!-- 给 ValidateInput组件的rules数组传值 -->
+    </div>
+      <div class="mb-3">
+        <label class="form-label">密码</label>
+        <vaildate-input :rules="passwordRules" v-model="passwordVal"
+        placeholder="请输入密码" 
+        type = 'password'>
+          </vaildate-input> 
         <!-- 给 ValidateInput组件的rules数组传值 -->
     </div>
     </form>
@@ -28,7 +39,7 @@
 </template>
 
 <script lang = 'ts'>
-import { defineComponent,reactive } from "vue";
+import { defineComponent,reactive,ref} from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import ColumnList, { ColumnProps } from "./components/ColumnList.vue";
 import GobalHeader, { UserProps } from "./components/GlobalHeader.vue";
@@ -84,10 +95,18 @@ export default defineComponent({
     VaildateInput
   },
   setup() {
+    const emailVal = ref('')
+    const passwordVal = ref('')
     const emailRules: RulesProp = [
       {type: 'require' ,message: '电子邮件地址不能为空'},
       {type: 'email' ,message: '请输入正确的电子邮箱格式'}
     ]
+      const passwordRules: RulesProp= [
+      { type: 'require', message: '密码不能为空' },
+      // 范围规则
+      // { type: 'range', min: { message: '你的密码至少包括六位，不能含有空格', length: 6 } }
+    ]
+
     // const emailRef = reactive({
     //   val:'',
     //   error:false,
@@ -108,7 +127,9 @@ export default defineComponent({
       currentUser,
       // emailRef,
       // vaildateEmail
-      emailRules
+      emailRules,
+      emailVal,
+      passwordRules
     };
   }
 });

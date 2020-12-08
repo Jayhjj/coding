@@ -1,11 +1,12 @@
 <template>
   <div class="validate-input-container pb-3">
     <input
-      type="text"
       class="form-control"
       :class="{'is-invalid':inputRef.error}"
-      v-model="inputRef.val"
+      :value="inputRef.val"
       @blur="vaildateEmail"
+      @input="updateValue"
+      v-bind="$attrs"
     >
     <span v-if="inputRef.error" class="invalid-feedback">{{inputRef.message}}</span>
   </div>
@@ -20,14 +21,23 @@ interface RuleProp {
 export type RulesProp = RuleProp[];
 export default defineComponent({
   props: {
-    rules: Array as PropType<RulesProp>
+    rules: Array as PropType<RulesProp>,
+    modelValue: String
   },
-  setup(props) {
+  inheritAttrs: false,
+  setup(props,context) {
+    console.log(context.attrs);
     const inputRef = reactive({
-      val: "",
+      val: props.modelValue || '',
       error: false,
       message: ""
     });
+    const updateValue = (e: KeyboardEvent) => {
+      const targetValue = (e.target as HTMLInputElement).value
+      inputRef.val = targetValue
+      context.emit('update:modelValue',targetValue)
+
+    }
     const vaildateEmail = () => { 
         const rules1 = props.rules;
         if(rules1){  //rules里面的每一个rule都必须通过
@@ -51,7 +61,8 @@ export default defineComponent({
     };
     return {
       inputRef,
-      vaildateEmail
+      vaildateEmail,
+      updateValue
     };
   }
 });
