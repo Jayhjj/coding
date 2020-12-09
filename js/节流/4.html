@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const wait = 2000;
+        let pre = 0;
+        window.addEventListener('resize',() => {
+            let current = Date.now();
+            if(current - pre >= wait){
+                console.log(1);
+                pre = current;
+            }
+            
+        })
+        let pre1 = 0 
+        window.addEventListener('scroll',() => {
+            let current = Date.now();
+            if(current - pre >= wait){
+                 console.log('scroll');
+                console.log('发出请求');
+                pre1 = current;
+            }
+           
+        })
+        //相同: 做某件事都要节流，不同:就是做的事情不同，就是函数不同(function)
+        function throttle(func, wait) {
+            let pre = 0;
+                return function () {
+                    let current = Date.now;
+                    if (current - pre >= wait) {
+                        func(this)
+                        pre = current;
+                    }
+                }
+        }
+        let fn = () => {
+            console.log(1);
+        }
+        let fnc1 = throttle(fn,2000);
+        window.addEventListener('resize',fnc1)
+    </script>
+</body>
+</html>
