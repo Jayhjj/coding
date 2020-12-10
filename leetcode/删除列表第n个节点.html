@@ -1,0 +1,19 @@
+<script>
+    var removeNthFromEnd = function(head, n) {
+    let count = 0;
+    let node = head;
+    while(node){
+        node = node.next;
+        count++;
+    }
+    count = count -n -1;
+    if(count == -1) return head.next;
+    node = head
+    while(count > 0){
+        node = node.next;
+        count--
+    }
+    node.next = node.next.next
+    return head
+};
+</script>
