@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+.row {
+	display: flex;
+}
+
+.col {
+	border: 1px solid gray;
+	width: 80px;
+	height: 80px;
+}
+
+.active {
+	background-color: blue;
+}
+
+</style>
+</head>
+
+<body>
+  <div id="grid"></div>
+  <script>
+    let grid = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ]
+    let wrap = document.getElementById('grid')
+    render()
+    function render() {
+      wrap.innerHTML = ''
+      let frag = document.createDocumentFragment();
+      grid.forEach((row, rowIndex) => {
+        let rowNode = document.createElement('div')
+        rowNode.classList.add('row');
+        frag.appendChild(rowNode);
+        row.forEach((col, colIndex) => {
+          let colNode = document.createElement('div')
+          colNode.classList.add('col');
+          if (grid[rowIndex][colIndex] === 1) {
+            colNode.classList.add('active');
+          }
+          colNode.setAttribute(`posinfo`, `${rowIndex}-${colIndex}`)
+          rowNode.appendChild(colNode);
+        })
+      })
+      wrap.appendChild(frag);
+    }
+    wrap.addEventListener('mouseover', (e) => {
+      let target = e.target;
+      if (target.classList.contains('col')) {
+        let [rowi, coli] = target.getAttribute('posinfo').split('-').map(e => parseInt(e));
+        // console.log(row, col)
+        grid.forEach((row, rowIndex) => {
+          row.forEach((col, colIndex) => {
+            if (rowIndex <= rowi && colIndex <= coli) {
+              grid[rowIndex][colIndex] = 1;
+            } else {
+              grid[rowIndex][colIndex] = 0;
+            }
+          })
+        })
+        render()
+      }
+    })
+  </script>
+</body>
+
+</html>

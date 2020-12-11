@@ -1,0 +1,22 @@
+<script>
+    function sleep(wait) {
+        return new Promise((reslove) => {
+            setTimeout(() => {
+                reslove(2)
+            }, wait)
+
+        }).then((value) => {
+            console.log(value)
+        })
+    }
+    // function sleep(wait){
+    //     setTimeout(() => {
+    //         console.log(wait);
+    //     },wait)
+    // }
+    async function foo() {
+        await sleep(3000)
+        console.log(2)
+    }
+    foo();
+</script>

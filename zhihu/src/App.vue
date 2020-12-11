@@ -97,6 +97,10 @@ export default defineComponent({
   setup() {
     const emailVal = ref('')
     const passwordVal = ref('')
+    // ruels:{
+    //   email:[],
+    //   password:[]
+    // }
     const emailRules: RulesProp = [
       {type: 'require' ,message: '电子邮件地址不能为空'},
       {type: 'email' ,message: '请输入正确的电子邮箱格式'}

@@ -1,0 +1,18 @@
+<script>
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/send', true);
+    xhr.onreadystatechange = function() {
+      // 4
+      if (xhr.readyState === xhr.DONE) {
+        console.log(xhr.responseText);
+      }
+    }
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    let jsonObj = {
+      userName: 'xx', pwd: 123
+    }
+    // send(后端数据)
+    // 后端接受数据：前端传了什么类型的数据过去
+    xhr.send(JSON.stringify(jsonObj));
+  </script>
+  
