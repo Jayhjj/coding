@@ -1,0 +1,27 @@
+<%- include('header',{type:'singin'})%> 
+    <div class="container">
+        <form class="form create" method="POST">
+            <div>
+                <label for="">用户名</label>
+                <input type="text" placeholder="用户名" name="name">
+            </div>
+            <div>
+                <label for="">密码</label>
+                <input type="password" placeholder="密码" password="password">
+            </div>  
+            <div class="submit">登录</div> 
+            <button class="submit">登录</button>
+        </form>
+    </div>
+
+    <script>
+        // $(window)
+        $('.submit').click(function(){
+            if($('input[name = name]').val().trim() == '' || $('input[password = password]').val().trim() == ''){
+                fade('请输入用户名和密码')
+            }else{
+                 console.log($('.form').serialize());        
+            }
+        })
+    </script>
+<% include footer %>
