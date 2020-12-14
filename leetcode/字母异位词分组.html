@@ -1,0 +1,21 @@
+<script>
+var groupAnagrams = function(strs) {
+    var h = new Map, k
+    for(var i = 0; i < strs.length; i++) 
+        // k = strs[i].split('').sort().join('');
+        // h.has(k = strs[i].split('').sort().join('')) ? h.get(k).push(strs[i]) : h.set(k, [strs[i]])
+        // k是数组字母排序之后的字符串当作key,如果h当中有有这个排序之后的key,那么就把这个字符串push进这个数组
+        if(h.has(k = strs[i].split('').sort().join(''))){
+            h.get(k).push(strs[i]);
+            // console.log(h);  
+        }else{
+            h.set(k, [strs[i]])
+            // console.log(h);
+        }
+    // return Array.from(h.values());
+    console.log( Array.from(h.values()))
+};
+    groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+    
+ 
+</script>
