@@ -58,6 +58,11 @@ export default {
         }
       }).then(res => {
           console.log(res);
+          if(res.data.code === '80000'){
+            this.$router.push('/starLogin')
+          }else{
+            this.$toast(res.data.mess)
+          }
       });
     },
     login() {

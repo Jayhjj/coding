@@ -4,12 +4,12 @@ import router from './router'
 import store from './store'
 import 'vant/lib/index.css'
 import 'amfe-flexible'
-import { Swipe, SwipeItem } from 'vant';
+import { Swipe, SwipeItem,Icon} from 'vant';
 import { Toast } from 'vant';
 import axios from 'axios'
 import util from './assets/js/util'
 Vue.config.productionTip = false
-Vue.use(Swipe).use(SwipeItem);
+Vue.use(Swipe).use(SwipeItem).use(Icon);
 Vue.use(Toast);
 Vue.use(axios);
 

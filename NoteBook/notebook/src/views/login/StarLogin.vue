@@ -42,7 +42,7 @@ export default {
           userpwd: this.userpwd.trim()
         }
       }).then( res => {
-        // console.log(res);
+        console.log(res);
         if(res.data.data.code === '80000'){
             sessionStorage.setItem('user_info',JSON.stringify(res.data.data))
           this.$router.push('/noteClass')
