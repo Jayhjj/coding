@@ -1,12 +1,12 @@
 <template>
   <div class="note-list">
     <ul>
-      <li>
+      <li v-for="item in noteList" :key="item.id" @click="noteDetail(item.id)">
         <div class="img">
-          <img src alt />
+          <img :src="item.head_img" alt="" />
         </div>
-        <p class="time">2020-12-12</p>
-        <p class="title">好吃的美食</p>
+        <p class="time">{{item.c_time}}</p>
+        <p class="title">{{item.title}}</p>
       </li>
     </ul>
   </div>
@@ -16,7 +16,7 @@
 export default {
     data(){
         return{
-
+            noteList: []
         }
     },
     created(){
@@ -26,15 +26,22 @@ export default {
         initNoteList(){
             let note_type = this.$route.query.title
             this.$http({
-                methods:'post',
+                method:'post',
                 url:this.$util.baseUrl + 'users/findNoteListByType',
                 data:{
                     note_type:note_type
                 }
             }).then(res => {
-                console.log(res);
-
+                // console.log(res);
+                if(res.data.code === '80000'){
+                    this.noteList = res.data.data
+                }else{
+                    this.$toast(res.data.mess)
+                }
             })
+        },
+        noteDetail(id){
+          this.$router.push({path:"/noteDetail",query:{id: id}})
         }
     }
 };
@@ -43,6 +50,7 @@ export default {
 .note-list {
   width: 100vw;
   padding: 1.066667rem 0.666667rem 0;
+  box-sizing: border-box;
   ul {
     display: flex;
     flex-direction: row;

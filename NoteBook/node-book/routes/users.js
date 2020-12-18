@@ -94,4 +94,49 @@ router.post('/userRegister',async(ctx,next) => {
 })
 
 //查找文章列表接口
+router.post('/findNoteListByType',async(ctx,next) => {
+  let note_type = ctx.request.body.note_type
+  await userService.findNoteListByType(note_type).then(res => {
+    console.log(res);
+    let r = ''
+    if(res.length){
+      r = 'ok';
+      ctx.body = {
+        code:'80000',
+        data: res,
+        mess:'查找成功'
+      }
+    }else{
+      r = 'error',
+      ctx.body = {
+        code:'80004',
+        data: r,
+        mess:'查找失败'
+      }
+    }
+  })
+})
+
+//根据id查找对应的文章详情
+router.post('/findNoteDetailById',async(ctx,next) => {
+  let note_id = ctx.request.body.note_id
+  await userService.findNoteDetailById(note_id).then(res => {
+    let r = ''
+     if(res.length){
+      r = 'ok';
+      ctx.body = {
+        code:'80000',
+        data: res[0],
+        mess:'查找成功'
+      }
+    }else{
+      r = 'error',
+      ctx.body = {
+        code:'80004',
+        data: r,
+        mess:'暂无数据'
+      }
+    }
+  })
+})
 module.exports = router
