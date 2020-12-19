@@ -1,0 +1,12 @@
+<script>
+    let shallowCopy = function(obj){
+        if(typeof obj !== 'object') return;
+        let newArr = obj instanceof Array ? [] : {}
+        for(let key in obj){
+            if(obj.hasOwnProperty(key)){
+                newArr[key] = obj[key]
+            }
+        }
+        return newArr;
+    }
+</script>
