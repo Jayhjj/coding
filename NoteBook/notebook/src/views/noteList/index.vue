@@ -29,10 +29,10 @@ export default {
                 method:'post',
                 url:this.$util.baseUrl + 'users/findNoteListByType',
                 data:{
-                    note_type:note_type
+                    note_type: note_type
                 }
             }).then(res => {
-                // console.log(res);
+                console.log(res);
                 if(res.data.code === '80000'){
                     this.noteList = res.data.data
                 }else{

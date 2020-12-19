@@ -44,6 +44,14 @@ const routes = [
     meta:{
       title:'笔记详情'
     }
+  },
+  {
+    path:'/noteEdit',
+    name:'noteEdit',
+    component: () => import('@/views/noteEdit/index'),
+    meta:{
+      title:'笔记编辑'
+    }
   }
 ]
 

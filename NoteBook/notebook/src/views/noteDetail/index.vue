@@ -16,7 +16,7 @@
 <script>
 export default {
     data(){
-        detailData = []
+        detailData = [];
     },
     created(){
         this.initDetail()
@@ -28,7 +28,7 @@ export default {
                 method:'post',
                 url:this.$util.baseUrl + 'users/findNoteDetailById',
                 data:{
-                    note_id = node_id
+                    note_id: node_id
                 }
             }).then(res => {
                 if(res.data.code === '80000'){
@@ -43,7 +43,7 @@ export default {
     }
 };
 </script>
-<style lang="less" scoped>
+<style lang= "less" scoped>
 .note-detail {
   width: 100%;
   .note-img {
