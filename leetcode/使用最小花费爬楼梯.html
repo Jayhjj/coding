@@ -1,0 +1,14 @@
+<script>
+    var minCostClimbingStairs = function(cost) {
+        let n = cost.length;
+        let pre = 0 ; let cur = 0;
+        for(let i = 2; i< length;i++){
+            let next = Math.min(cur + cost[i-1],pre + cost[i-2]);
+             pre = cur;
+            cur = next;
+        }
+        return cur
+    };
+</script>
+
+

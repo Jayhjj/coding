@@ -1,0 +1,25 @@
+<script>
+    var zigzagLevelOrder = function(root) {
+        let res = [];
+        let queue = [root];
+        if(!root) return [];
+        let a = true
+        while(queue.length){
+            let row = queue.splice(0);
+            let r = [];
+            for(let node of row){
+                if(a){
+                    r.push(node.val)
+                }else{
+                    r.unshift(node.val)
+                }
+                
+                if(node.left) queue.push(node.left);
+                if(node.right) queue.push(node.right);
+            }
+            res.push(r);
+            a = !a;
+        }
+        return res
+    };
+</script>

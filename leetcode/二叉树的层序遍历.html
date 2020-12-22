@@ -1,0 +1,18 @@
+<script>
+
+var levelOrder = function(root) {
+    let res = [];
+    let queue = [root]
+    while(queue.length){
+        let row = queue.splice(0);
+        let r = [];
+        for(node of row){
+            r.push(node.val);
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+        }
+          res.push(r)
+    }
+  return res
+};
+</script>
