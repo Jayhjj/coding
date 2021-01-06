@@ -2,48 +2,38 @@
   <div class="container">
     <gobal-header :user="currentUser"></gobal-header>
     <!-- <column-list :list="list"></column-list> -->
-    <form action>
-    <div class="mb-3">
+    <validate-form @form-submit="onFormSubmit">
+      <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <vaildate-input :rules="emailRules" v-model="emailVal" 
-        placeholder="请输入邮箱地址" 
-        type = 'text'>
-          </vaildate-input> 
+        <vaildate-input :rules="emailRules" v-model="emailVal" placeholder="请输入邮箱地址" type="text" />
+
         <!-- 给 ValidateInput组件的rules数组传值 -->
-    </div>
+      </div>
       <div class="mb-3">
         <label class="form-label">密码</label>
-        <vaildate-input :rules="passwordRules" v-model="passwordVal"
-        placeholder="请输入密码" 
-        type = 'password'>
-          </vaildate-input> 
-        <!-- 给 ValidateInput组件的rules数组传值 -->
-    </div>
-    </form>
-    <!-- <form action>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
-        <input 
-          type="text" class="form-control" id="exampleInputEmail1" 
-          v-model ="emailRef.val"
-          @blur ="vaildateEmail"
+        <vaildate-input
+          :rules="passwordRules"
+          v-model="passwordVal"
+          placeholder="请输入密码"
+          type="password"
         />
-        <div class="form-text" v-if="emailRef.error">{{ emailRef.message }}</div>
+
+        <!-- 给 ValidateInput组件的rules数组传值 -->
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">密码</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" />
-      </div>
-    </form> -->
+      <template v-slot:submit>
+        <span class="btn btn-danger">Submit</span>
+      </template>
+    </validate-form>
   </div>
 </template>
 
 <script lang = 'ts'>
-import { defineComponent,reactive,ref} from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import ColumnList, { ColumnProps } from "./components/ColumnList.vue";
 import GobalHeader, { UserProps } from "./components/GlobalHeader.vue";
-import VaildateInput ,{ RulesProp } from './components/ValidateInput.vue'
+import VaildateInput, { RulesProp } from "./components/ValidateInput.vue";
+import ValidateForm from "./components/ValidateForm.vue";
 const currentUser: UserProps = {
   isLogin: true,
   name: "jay"
@@ -92,32 +82,34 @@ export default defineComponent({
   components: {
     //  ColumnList,
     GobalHeader,
-    VaildateInput
+    VaildateInput,
+    ValidateForm
   },
   setup() {
-    const emailVal = ref('')
-    const passwordVal = ref('')
+    const emailVal = ref("");
+    const passwordVal = ref("");
     // ruels:{
     //   email:[],
     //   password:[]
     // }
     const emailRules: RulesProp = [
-      {type: 'require' ,message: '电子邮件地址不能为空'},
-      {type: 'email' ,message: '请输入正确的电子邮箱格式'}
-    ]
-      const passwordRules: RulesProp= [
-      { type: 'require', message: '密码不能为空' },
-      // 范围规则
-      // { type: 'range', min: { message: '你的密码至少包括六位，不能含有空格', length: 6 } }
-    ]
-
+      { type: "require", message: "电子邮件地址不能为空" },
+      { type: "email", message: "请输入正确的电子邮箱格式" }
+    ];
+    const passwordRules: RulesProp = [
+      { type: "require", message: "密码不能为空" }
+      
+    ];
+    const onFormSubmit = (result: boolean) => {
+      console.log('1234',result)
+    }
     // const emailRef = reactive({
     //   val:'',
     //   error:false,
     //   message:''
     // })
     // const vaildateEmail = () => {
-     
+
     //   if(emailRef.val.trim() === ''){
     //     emailRef.error = true
     //     emailRef.message = 'can not empty'
@@ -133,7 +125,8 @@ export default defineComponent({
       // vaildateEmail
       emailRules,
       emailVal,
-      passwordRules
+      passwordRules,
+      onFormSubmit
     };
   }
 });
