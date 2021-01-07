@@ -1,0 +1,24 @@
+<script>
+    var findCircleNum = function(isConnected) {
+        const provinces = isConnected.length;
+        const visted = new Set();
+        let circles = 0 ;
+        const queue = new Array()
+        for(let i = 0 ;i < provinces;i++){
+            if(!visted.has(i)){
+                queue.push(i);
+                while(queue.length){
+                    const j = queue.shift();
+                    visted.add(j);
+                    for(let k = 0 ; k < provinces ; k++){
+                        if(isConnected[j][k] === 1 && !visted.has(k)){
+                            queue.push(k);
+                        }
+                    }
+                }
+                circles++;
+            }
+        }
+        return circles
+    }
+</script>
