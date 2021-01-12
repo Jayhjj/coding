@@ -1,10 +1,11 @@
 function debounce() {
-    let timer
+    let timer;
     return function() {
       clearTimeout(timer)
       timer = setTimeout(() => {
-        fn()
+        fn();
       }, 2000);
     }
   }
+
   
