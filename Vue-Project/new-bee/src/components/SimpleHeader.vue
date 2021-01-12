@@ -16,13 +16,13 @@ export default {
     }
 	},
 	setup(props){
-      const name = ref(props.name)
+      // const name = ref(props.name)
       const router = useRouter()
       const goBack = () => {
         router.go(-1)
       }
       return{
-        name,
+        // name,
         goBack
       }
 	}
