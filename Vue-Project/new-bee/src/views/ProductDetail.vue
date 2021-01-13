@@ -31,25 +31,28 @@
     <!-- 底部 -->
     <van-action-bar>
       <van-action-bar-icon icon="chat-o" text="客服" dot />
-      <van-action-bar-icon icon="cart-o" text="购物车" badge="5" />
+      <van-action-bar-icon icon="cart-o" text="购物车" :badge="count ? count : '' " @click="goTo" />
       <van-action-bar-button type="warning" text="加入购物车" @click="handleAddCart"/>
-      <van-action-bar-button type="danger" text="立即购买" />
+      <van-action-bar-button type="danger" text="立即购买" @click="goToCart"/>
     </van-action-bar>
   </div>
 </template>
 <script>
 import sHeader from "@/components/SimpleHeader";
-import { onMounted, reactive, toRefs } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted, reactive, toRefs, computed } from "vue";
+import { useRoute,useRouter } from "vue-router";
 import { getDetail } from "@/service/goods.js";
 import {addCart} from '@/service/cart.js'
 import { Toast } from 'vant';
+import {useStore} from 'vuex'
 export default {
   components: {
     sHeader
   },
   setup() {
     const route = useRoute();
+    const store = useStore();
+    const router = useRouter();
     const state = reactive({
       detail: {
         goodsCarouselList: [],
@@ -66,6 +69,7 @@ export default {
       // console.log(data)
       //data与数据源写的数据一一对应,只要把data赋值给detail就可以了
       state.detail = data;
+      store.dispatch('updateCart')
     });
 
     //加入购物车
@@ -75,11 +79,28 @@ export default {
         if(resultCode === 200){
             Toast.success('添加成功');
         }
-        
+        store.dispatch('updateCart')
+    }
+    //角标 ,监听变化
+    const count = computed(() => {
+        return store.state.cartCount
+    })
+    //立即购买
+    const goToCart = async () => {
+         await addCart({goodsCount: 1,goodsId: state.detail.goodsId})
+         store.dispatch('updateCart')
+         router.push({path:'/cart'})
+    }
+    //去购物车界面
+    const goTo = () => {
+        router.push({path: '/cart'})
     }
     return {
       ...toRefs(state),
-      handleAddCart
+      handleAddCart,
+      count,
+      goToCart,
+      goTo
     };
   }
 };
