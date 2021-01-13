@@ -81,6 +81,11 @@
 import sHeader from "@/components/SimpleHeader";
 import { reactive, toRefs ,ref} from 'vue';
 import vueImgVerify from '@/components/VueImgVerify'
+import {Toast} from 'vant'
+import {register,login} from '@/service/user'
+import {setLocal} from '@/common/js/utils'
+import md5 from 'js-md5'
+import {useRouter} from 'vue-router'
 export default {
   components: {
     sHeader,
@@ -88,22 +93,55 @@ export default {
   },
   setup(){
     const verifyRef = ref(null)
+    const router = useRouter()
     const state = reactive({
       username:'',
       password:'',
       verify:'',
       type: 'login',
       username1:'',
-      password1:''
+      password1:'',
+      imgCode:''
     })
     const toggle = (v) => {
       state.type = v
       state.verify = ''
     }
+    //登录注册
+    const onSubmit = async(values) => {
+      console.log(verifyRef.value.imgCode)//取verify的DOM结构,通过ref.value可以取到组件内setup函数返回的值
+      state.imgCode = verifyRef.value.imgCode || ''
+      if(state.verify.toLowerCase() !== state.imgCode.toLowerCase()){//比较输入的是否等于生成的验证码
+        Toast.fail('验证码有误');
+        return
+      }
+      if(state.type == 'login'){//登录
+       const {data} =  await login({
+          "loginName": state.username,
+          "passwordMd5": md5(state.password)
+          //成功后，返回出的data就是token,要跳到首页
+        })
+        //token {data} 保存在本地
+        setLocal('token',data)
+        //页面跳转
+        // const router = useRouter()
+        router.push('/home')
+        
+      }else{ //注册
+        await register({
+          "loginName": state.username1,
+          "password": state.password1
+        })
+        Toast.success('注册成功')
+        state.type = 'login'
+        state.verify = ''
+      }
+    }
     return{
       ...toRefs(state),
       verifyRef,
-      toggle
+      toggle,
+      onSubmit
     }
   }
 };
