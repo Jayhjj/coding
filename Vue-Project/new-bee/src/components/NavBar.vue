@@ -6,6 +6,7 @@
         <span>首页</span>
       </router-link>
       <router-link tag="li" class="nav-list-item" to="category">
+        <!-- <van-icon name="iconfont icon-category" /> -->
         <i class="iconfont icon-category"></i>
         <span>分类</span>
       </router-link>
