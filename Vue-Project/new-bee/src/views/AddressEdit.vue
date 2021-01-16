@@ -19,6 +19,7 @@
 import sHeader from "@/components/SimpleHeader";
 import {Toast} from 'vant'
 import { reactive, onMounted, toRefs } from 'vue';
+import {tdist} from '../common/js/utils'
 export default {
   components: {
     sHeader
@@ -34,8 +35,19 @@ export default {
       onMounted(() => {
           let _province_list = {}
           let _city_list = {}
-          let county_list = {}
-          tdist.getLev1().forEach()
+          let _county_list = {}
+          tdist.getLev1().forEach(p => {
+            _province_list[p.id] = p.text
+            
+            tdist.getLev2(p.id).forEach(c => {
+              _city_list[c.id] = c.text
+
+              tdist.getLev3(c.id).forEach(q => {
+                _county_list[q.id] = q.text
+              })
+            })
+          })
+          console.log(_province_list)
       })
       return {
           ...toRefs(state)
