@@ -18,10 +18,29 @@
 <script>
 import sHeader from "@/components/SimpleHeader";
 import {Toast} from 'vant'
+import { reactive, onMounted, toRefs } from 'vue';
 export default {
   components: {
     sHeader
   },
+  setup(){
+      const state = reactive({
+          areaList:{
+              province_list: {},
+              city_list: {},
+              county_list: {}
+          }
+      })
+      onMounted(() => {
+          let _province_list = {}
+          let _city_list = {}
+          let county_list = {}
+          tdist.getLev1().forEach()
+      })
+      return {
+          ...toRefs(state)
+      }
+  }
 }
 </script>
 
