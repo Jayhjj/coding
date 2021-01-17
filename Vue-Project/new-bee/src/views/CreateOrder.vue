@@ -35,6 +35,7 @@ import {getByCartItemIds} from '@/service/cart.js'
 import {getAddressDetail,getDefaultAddress} from '@/service/address.js'
 import {useRoute,useRouter} from 'vue-router'
 import {Toast} from 'vant'
+import {setLocal,getLocal} from '@/common/js/utils.js'
 export default {
   components: {
     sHeader
@@ -43,7 +44,8 @@ export default {
       const route = useRoute()
       const router = useRouter()
       const state = reactive({
-          cartList:[]
+          cartList:[],
+          cartItemId:[]
       })
       onMounted(() => {
           init()
@@ -52,7 +54,10 @@ export default {
            Toast.loading({message:'加载中...',forbidClick: true})
         //    console.log(route.query)
            const {cartItemId,addressId} = route.query
-           const _cartItemId =  JSON.parse(cartItemId) 
+           const _cartItemId = cartItemId ? JSON.parse(cartItemId) : JSON.parse(getLocal('cartItemId'))
+           //cartItemId有不存在的情况,所以在本地存储一下
+            setLocal('cartItemId',cartItemId)
+
            //请求用户地址
             const {data: address} = addressId ? await getAddressDetail(addressId) : await getDefaultAddress()
             if(!address){
@@ -67,8 +72,13 @@ export default {
             state.cartList = list
             Toast.clear()
       }
+      //跳转到编辑地址
+      const goTo = () => {
+        router.push({path:'/address',query:{cartItemId: JSON.stringify(state.cartItemId),from: 'create-order'}})
+      }
       return{
-          ...toRefs(state)
+          ...toRefs(state),
+          goTo
       }
   }
 };

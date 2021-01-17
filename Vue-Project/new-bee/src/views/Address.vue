@@ -49,15 +49,31 @@ export default {
       }
       //空,得去增加数据
       console.log(data)
+      state.list = data.map(item => {
+        return{
+          id: item.addressId,
+          name: item.userName,
+          tel: item.userPhone,
+          address: `${item.provinceName} ${item.cityName} ${item.regionName} ${item.detailAddress}`,
+          isDefault: !!item.defaultFlag
+        }
+      })
     })
 
     //新增地址
     const onAdd = () => {
       router.push({path:'/address-edit',query:{type: 'add',from:state.from}})
     }
+    //选中地址
+    const select = (item) => {
+      console.log(item);
+      router.push({path:'/create-order',query:{address: item.id,from: state.from}})
+    }
+
     return {
       ...toRefs(state),
-      onAdd
+      onAdd,
+      select
     };
   }
 };

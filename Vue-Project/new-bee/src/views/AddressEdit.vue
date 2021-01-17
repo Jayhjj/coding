@@ -1,5 +1,5 @@
 <template>
-  <div class="address-edit">
+  <div class="address-edit-box">
     <s-header :name="'新增地址'"></s-header>
     <van-address-edit
     :area-list="areaList"
@@ -19,20 +19,25 @@
 import sHeader from "@/components/SimpleHeader";
 import {Toast} from 'vant'
 import { reactive, onMounted, toRefs } from 'vue';
-import {tdist} from '../common/js/utils'
+import {tdist, setLocal} from '../common/js/utils'
+import {addAddress,editAddress} from '@/service/address.js'
+import { useRouter } from 'vue-router';
 export default {
   components: {
     sHeader
   },
   setup(){
+      const router = useRouter()
       const state = reactive({
           areaList:{
               province_list: {},
               city_list: {},
               county_list: {}
-          }
+          },
+          type: 'add'
       })
-      onMounted(() => {
+      onMounted(async() => {
+        //省市区列表构建
           let _province_list = {}
           let _city_list = {}
           let _county_list = {}
@@ -47,15 +52,58 @@ export default {
               })
             })
           })
-          console.log(_province_list)
+          // console.log(_province_list)
+          state.areaList.province_list = _province_list
+          state.areaList.city_list = _city_list
+          state.areaList.county_list = _county_list
       })
+
+      const onSave = async(content) => {
+        console.log(content);//可以拿到输入的数据
+        const params = {
+          userName: content.name,
+          userPhone: content.tel,
+          provinceName: content.province,
+          cityName: content.city,
+          regionName: content.county,
+          detailAddress: content.addressDetail,
+          defaultFlag: content.isDefault ? 1 : 0
+        }
+        // 新增或者修改
+        await state.type === 'add' ? addAddress(params) : editAddress(params)
+        Toast('保存成功')
+        setTimeout(() => {
+          router.back()
+        },1000)
+      }
+
       return {
-          ...toRefs(state)
+          ...toRefs(state),
+          onSave
       }
   }
 }
 </script>
 
-<style>
-
+<style lang="less">
+  @import '../common/style/mixin';
+  .edit {
+    .van-field__body {
+      textarea {
+        height: 26px!important;
+      }
+    }
+  }
+  .address-edit-box {
+    margin-top: 44px;
+    .van-address-edit {
+      .van-button--danger {
+        background: @primary;
+        border-color: @primary;
+      }
+      .van-switch--on {
+        background: @primary;
+      }
+    }
+  }
 </style>
