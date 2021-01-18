@@ -67,7 +67,7 @@ export default {
     //选中地址
     const select = (item) => {
       console.log(item);
-      router.push({path:'/create-order',query:{address: item.id,from: state.from}})
+      router.push({path:'/create-order',query:{addressId: item.id,from: state.from}})
     }
 
     return {

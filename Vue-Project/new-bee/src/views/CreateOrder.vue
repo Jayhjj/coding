@@ -4,10 +4,10 @@
     <!-- 地址 -->
     <div class="address-wrap">
       <div class="name" @click="goTo">
-        <span>jay</span>
-        <span>1234567</span>
+        <span>{{address.userName}}</span>
+        <span>{{address.userPhone}}</span>
       </div>
-      <div class="address"> 江西省</div>
+      <div class="address">{{address.provinceName}} {{address.cityName}} {{address.regionName}} {{address.detailAddress}}</div>
       <van-icon class="arrow" name="arrow" />
     </div>
 
@@ -45,7 +45,8 @@ export default {
       const router = useRouter()
       const state = reactive({
           cartList:[],
-          cartItemId:[]
+          cartItemId:[],
+          address: {}
       })
       onMounted(() => {
           init()
@@ -56,7 +57,7 @@ export default {
            const {cartItemId,addressId} = route.query
            const _cartItemId = cartItemId ? JSON.parse(cartItemId) : JSON.parse(getLocal('cartItemId'))
            //cartItemId有不存在的情况,所以在本地存储一下
-            setLocal('cartItemId',cartItemId)
+            setLocal('cartItemId',JSON.stringify(_cartItemId))
 
            //请求用户地址
             const {data: address} = addressId ? await getAddressDetail(addressId) : await getDefaultAddress()
@@ -64,11 +65,12 @@ export default {
                 router.push({path:'/address'})
                 return
             }
-
+            state.address = address
+            console.log(address)
             //请求要购买的商品数据
             // console.log( _cartItemId.join(','))
             const {data :list} = await getByCartItemIds({cartItemIds: _cartItemId.join(',')})
-            // console.log(data)//拿到了列表数据
+            // console.log(list)//拿到了列表数据
             state.cartList = list
             Toast.clear()
       }
