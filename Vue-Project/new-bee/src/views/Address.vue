@@ -64,6 +64,10 @@ export default {
     const onAdd = () => {
       router.push({path:'/address-edit',query:{type: 'add',from:state.from}})
     }
+    //修改地址
+    const onEdit = (item) => {
+      router.push({path:'/address-edit',query:{type: 'edit',addressId:item.id,from:state.from}})
+    }
     //选中地址
     const select = (item) => {
       console.log(item);
@@ -73,7 +77,8 @@ export default {
     return {
       ...toRefs(state),
       onAdd,
-      select
+      select,
+      onEdit
     };
   }
 };
