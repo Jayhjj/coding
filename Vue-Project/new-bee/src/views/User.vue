@@ -55,8 +55,8 @@ export default {
       console.log(data)
       state.user = data;
     });
-    const goTo = (pramas) => {
-      router.push(pramas)
+    const goTo = (path,query) => {
+      router.push({path:path,query:query || {}})
     }
     return {
       ...toRefs(state),
