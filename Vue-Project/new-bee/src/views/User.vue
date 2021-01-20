@@ -39,21 +39,28 @@ import sHeader from "@/components/SimpleHeader";
 import navBar from "@/components/NavBar";
 import { getUserInfo } from "@/service/user.js";
 import { reactive, toRefs, onMounted } from "vue";
+import { useRouter } from 'vue-router';
 export default {
   components: {
     sHeader,
     navBar
   },
   setup() {
+    const router = useRouter()
     const state = reactive({
       user: {}
     });
     onMounted(async () => {
       const { data } = await getUserInfo();
+      console.log(data)
       state.user = data;
     });
+    const goTo = (pramas) => {
+      router.push(pramas)
+    }
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      goTo
     };
   }
 };
