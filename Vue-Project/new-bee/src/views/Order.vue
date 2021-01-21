@@ -14,9 +14,23 @@
           <van-list
           v-model:loading="loading"
           :finsh="finshed"
+          :offset="10"
+          finshed-text="没有更多了"
           @load="onLoad"
           >
-
+          <div class="order-item-box">
+            <div class="order-item-header">
+              <span>订单时间: 2020-01-14</span>
+              <span>已支付</span>
+            </div>
+            <van-card
+              num="2"
+              price="2.00"
+              desc="描述信息"
+              title="商品标题"
+              thumb="https://img.yzcdn.cn/vant/ipad.jepg"
+            />
+          </div>
           </van-list>
         </van-pull-refresh>
       </div>
@@ -28,14 +42,15 @@ import sHeader from "@/components/SimpleHeader";
 import { reactive, toRefs } from 'vue';
 export default {
     components: {
-        sHeader
+        sHeader,
+        refreshing: false,
+        loading:false,
+        finshed:false
     },
     setup(){
         const state = reactive({
           stutas:'1',
-          refreshing: false,
-          loading:false,
-          finshed:false
+          
         })
         const onChangeTab = (name,title) => {
           console.log(name,title)
