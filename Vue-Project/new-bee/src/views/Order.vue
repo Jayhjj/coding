@@ -13,9 +13,9 @@
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="order-list-refresh">
           <van-list
           v-model:loading="loading"
-          :finsh="finshed"
+          :finished="finished"
           :offset="10"
-          finshed-text="没有更多了"
+          finished-text="没有更多了"
           @load="onLoad"
           >
           <div class="order-item-box">
@@ -23,7 +23,7 @@
               <span>订单时间: 2020-01-14</span>
               <span>已支付</span>
             </div>
-            <van-card
+            <van-card :v-for="(item,index) in list"
               num="2"
               price="2.00"
               desc="描述信息"
@@ -39,28 +39,46 @@
 
 <script>
 import sHeader from "@/components/SimpleHeader";
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs, onMounted } from 'vue';
+import {getCart} from '@/service/cart.js'
 export default {
     components: {
-        sHeader,
-        refreshing: false,
-        loading:false,
-        finshed:false
+        sHeader
     },
     setup(){
         const state = reactive({
           stutas:'1',
+          list:[],
+          refreshing: false,
+          loading:false,
+          finished:false,
+          page: 1,
+          totalpage:0
           
+        })
+        onMounted(async() => {
+          // const {data} = await getCart(item.id)
         })
         const onChangeTab = (name,title) => {
           console.log(name,title)
         }
+        //请求数据
+        const onLoad = () => {
+          if(!state.refreshing && state.page < state.totalpage){
+            state.page += 1
+          }
+        }
         const onRefresh = () => {
           state.refreshing = true
+          state.finished = false
+          state.loading = true
+          state.page = 1
+          onLoad()
         }
         return{
           ...toRefs(state),
-          onChangeTab
+          onChangeTab,
+          onRefresh
         }
     }
 }
