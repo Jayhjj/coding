@@ -18,12 +18,12 @@
           finished-text="没有更多了"
           @load="onLoad"
           >
-          <div class="order-item-box">
+          <div class="order-item-box" v-for="(item,index) in list" :key="index">
             <div class="order-item-header">
-              <span>订单时间: 2020-01-14</span>
-              <span>已支付</span>
+              <span>订单时间:{{item.createTime}}</span>
+              <span>{{item.orderStatusString}}</span>
             </div>
-            <van-card :v-for="(item,index) in list"
+            <van-card
               num="2"
               price="2.00"
               desc="描述信息"
@@ -79,9 +79,9 @@ export default {
           const {data,data:{list}} = await getOrderList({pageNumber:state.page,status:state.stutas})
           console.log(data,list);
           state.list = state.list.concat(list)
-          state.totalpage = data.totalpage
+          state.totalpage = data.totalPage
           state.loading = false
-          if(state.page >= data.totalpage){
+          if(state.page >= data.totalPage){
             state.finished = true
           }
         }
