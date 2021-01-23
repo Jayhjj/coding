@@ -41,6 +41,7 @@
 import sHeader from "@/components/SimpleHeader";
 import { reactive, toRefs, onMounted } from 'vue';
 import {getCart} from '@/service/cart.js'
+import {getOrderList} from '@/service/order.js'
 export default {
     components: {
         sHeader
@@ -63,11 +64,28 @@ export default {
           console.log(name,title)
         }
         //请求数据
-        const onLoad = () => {
+        const onLoad = () => {  //列表渲染自动执行
           if(!state.refreshing && state.page < state.totalpage){
             state.page += 1
           }
+          if(state.refreshing){
+            state.list = []
+            state.refreshing = false
+          }
+          loadDate()
         }
+
+        const loadDate = async () => {
+          const {data,data:{list}} = await getOrderList({pageNumber:state.page,status:state.stutas})
+          console.log(data,list);
+          state.list = state.list.concat(list)
+          state.totalpage = data.totalpage
+          state.loading = false
+          if(state.page >= data.totalpage){
+            state.finished = true
+          }
+        }
+
         const onRefresh = () => {
           state.refreshing = true
           state.finished = false
@@ -78,7 +96,8 @@ export default {
         return{
           ...toRefs(state),
           onChangeTab,
-          onRefresh
+          onRefresh,
+          onLoad
         }
     }
 }
