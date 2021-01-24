@@ -1,6 +1,6 @@
 <template>
   <div class="order-box">
-      <s-header :name="'我的订单'"></s-header>
+      <s-header :name="'我的订单'" :backUrl="'/user'"></s-header>
       <van-tabs v-model:active="status" class="order-tab" @click="onChangeTab" :color="'#1baeae'">
         <van-tab title="全部" name=""></van-tab>
         <van-tab title="待付款" name="0"></van-tab>
@@ -24,11 +24,13 @@
               <span>{{item.orderStatusString}}</span>
             </div>
             <van-card
-              num="2"
-              price="2.00"
-              desc="描述信息"
-              title="商品标题"
-              thumb="https://img.yzcdn.cn/vant/ipad.jepg"
+              v-for="good in item.newBeeMallOrderItemVOS"
+              :key="good.goodsId"
+              :num="good.goodsCount"
+              :price="good.sellingPrice"
+              desc="全场包邮"
+              :title="good.goosName"
+              :thumb="$filters.prefix(good.goodsCoverImg)"
             />
           </div>
           </van-list>
@@ -48,7 +50,7 @@ export default {
     },
     setup(){
         const state = reactive({
-          stutas:'1',
+          status:'',
           list:[],
           refreshing: false,
           loading:false,
@@ -62,6 +64,8 @@ export default {
         })
         const onChangeTab = (name,title) => {
           console.log(name,title)
+          state.status = name
+          onRefresh()
         }
         //请求数据
         const onLoad = () => {  //列表渲染自动执行
@@ -76,7 +80,7 @@ export default {
         }
 
         const loadDate = async () => {
-          const {data,data:{list}} = await getOrderList({pageNumber:state.page,status:state.stutas})
+          const {data,data:{list}} = await getOrderList({pageNumber:state.page,status:state.status})
           console.log(data,list);
           state.list = state.list.concat(list)
           state.totalpage = data.totalPage
@@ -84,6 +88,7 @@ export default {
           if(state.page >= data.totalPage){
             state.finished = true
           }
+          console.log(list)
         }
 
         const onRefresh = () => {

@@ -18,13 +18,21 @@ export default {
     back:{
       type: Boolean,
       default: true
+    },
+    backUrl:{
+ 			type: String,
+			default: ''     
     }
 	},
 	setup(props){
       // const name = ref(props.name)
       const router = useRouter()
       const goBack = () => {
-        router.go(-1)
+       if(props.backUrl){
+         router.push({path:props.backUrl})
+       }else{
+         router.go(-1)
+       }
       }
       return{
         // name,
