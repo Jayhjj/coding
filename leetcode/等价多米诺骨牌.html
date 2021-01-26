@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var numEquivDominoPairs = function (dominoes) {
+            let res = 0
+            // 直接来个双重循环
+            for (let i = 0; i < dominoes.length; i++) {
+                let [x, y] = dominoes[i]
+                for (let j = i + 1; j < dominoes.length; j++) {
+                    let [z, w] = dominoes[j]
+                    if (x == w && y == z || x == z && y == w) res++
+                }
+            }
+            return res
+        };
+    </script>
+</body>
+
+</html>
