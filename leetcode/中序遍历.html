@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var inorderTraversal = function (root) {
+            let res = [];
+            const zhongxu = (root) => {
+                if (!root) {
+                    return;
+                }
+                zhongxu(root.left);
+                res.push(root.val);
+                zhongxu(root.right)
+
+            }
+            zhongxu(root)
+            return res
+        };
+    </script>
+</body>
+
+</html>
