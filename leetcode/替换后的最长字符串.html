@@ -1,0 +1,18 @@
+<script>
+    var characterReplacement = function(s, k) {
+        if(!s) return 0;
+        let i = 0;
+        const codes = Array(26).fill(0) //记录窗口各字符出现的次数
+        let max = 0;
+        for(let j = 0 ;j<s.length;j++){
+            let n = s[j].charCodeAt() - 65
+            codes[n] += 1
+            max = Math.max(max,codes[n])
+            if(j-i+1>max+k){
+                code[s[i].charCodeAt() - 65] -= 1
+                i++
+            }
+        }
+        return s.length-i
+    }
+</script>
