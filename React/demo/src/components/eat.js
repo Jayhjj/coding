@@ -1,17 +1,18 @@
 import React, { Component ,Fragment} from 'react';
 import '../style/eat.css'
 import EatItem from './eatItem'
+import axios from 'axios'
 class Eat extends Component{
     constructor(props){
         super(props)
             this.state = {
                 inputValue: 'hello',
-                list:['宫保鸡丁','辣椒炒肉']
+                list:['宫保鸡丁']
         }
     }
     inputChange(e){
         this.setState({
-            inputValue: e.target.value
+            inputValue: this.input.value
         })
     }
     addList(){
@@ -27,13 +28,26 @@ class Eat extends Component{
             list: list
         })
     }
+
+    componentDidMount(){
+        axios.post('https://web-api.juejin.im/v3/web/wbbr/bgeda')
+            .then((res) => {
+                console.log(res)
+            })
+    }
    render(){
 
        return(
         <Fragment>
             <div>
                 
-                <input  className='input' value={this.state.inputValue} onChange = {this.inputChange.bind(this)}></input>
+                <input id="addGoods" 
+                    className='input' 
+                    value={this.state.inputValue} 
+                    onChange = {this.inputChange.bind(this)}
+                    ref={(input) => {this.input = input}}
+                    >
+                </input>
                 <button onClick={this.addList.bind(this)}>下单</button>
             </div>
             <ul>
