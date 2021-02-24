@@ -5,7 +5,13 @@
     <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <vaildate-input :rules="emailRules" v-model="emailVal" placeholder="请输入邮箱地址" type="text" />
+        <vaildate-input 
+          :rules="emailRules" 
+          v-model="emailVal" 
+          placeholder="请输入邮箱地址" 
+          type="text" 
+          ref="inputRef"
+        />
 
         <!-- 给 ValidateInput组件的rules数组传值 -->
       </div>
@@ -86,6 +92,7 @@ export default defineComponent({
     ValidateForm
   },
   setup() {
+    const inputRef = ref<any>()
     const emailVal = ref("");
     const passwordVal = ref("");
     // ruels:{
@@ -101,7 +108,8 @@ export default defineComponent({
       
     ];
     const onFormSubmit = (result: boolean) => {
-      console.log('1234',result)
+      console.log('result',inputRef.value.vaildateInput())
+      // console.log('1234',result)
     }
     // const emailRef = reactive({
     //   val:'',
@@ -126,7 +134,8 @@ export default defineComponent({
       emailRules,
       emailVal,
       passwordRules,
-      onFormSubmit
+      onFormSubmit,
+      inputRef
     };
   }
 });

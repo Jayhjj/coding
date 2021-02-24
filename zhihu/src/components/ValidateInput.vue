@@ -4,7 +4,7 @@
       class="form-control"
       :class="{'is-invalid':inputRef.error}"
       :value="inputRef.val"
-      @blur="vaildateEmail"
+      @blur="vaildateInput"
       @input="updateValue"
       v-bind="$attrs"
     >
@@ -38,7 +38,7 @@ export default defineComponent({
       context.emit('update:modelValue',targetValue)
 
     }
-    const vaildateEmail = () => { 
+    const vaildateInput = () => { 
         const rules1 = props.rules;
         if(rules1){  //rules里面的每一个rule都必须通过
             const allPassed = rules1.every(rule => { //这个方法返回的是一个boolean值，每一项返回true的时候等于true，只要有一项为false则为false，并立即停止循环
@@ -57,11 +57,13 @@ export default defineComponent({
                 return passed
             })
             inputRef.error = !allPassed //只要没通过就为false
+            return allPassed
         }
+        return true
     };
     return {
       inputRef,
-      vaildateEmail,
+      vaildateInput,
       updateValue
     };
   }

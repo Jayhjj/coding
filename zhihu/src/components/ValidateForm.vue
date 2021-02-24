@@ -20,6 +20,11 @@ export default  defineComponent({
         return{
             submitForm
         }
-    }
+    },
+    // mounted(){
+    //     this.$mitt('item-created',() => {
+
+    //     })
+    // }
 })
 </script>
