@@ -7,15 +7,21 @@ const router = createRouter({
     history:routerHistory,
     routes:[
         {
-            path:'/',
-            name:'home',
-            components:Home
+            path: '/',
+            redirect: '/home'
+        },
+        {
+            path: '/home',
+            name: 'home',
+            component: Home,
+            meta: {
+              index: 1
+            }
         },
         {
             path:'/login',
             name:'login',
-            components:Login,
-            meta: { redirectAlreadyLogin: true }
+            component:() => import('@/views/Login.vue')
         }
     ]
 })

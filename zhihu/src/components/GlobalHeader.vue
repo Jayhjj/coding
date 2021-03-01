@@ -1,9 +1,10 @@
 <template>
     <nav class="navbar navbar-dark bg-primary justify-content-between mb-4 px-4">
-        <a class="navbar-brand" href="#">知乎专栏</a>
+        <div class="w-75 mx-auto navbar">
+         <router-link class="navbar-brand" to="/">知乎专栏</router-link>
         <ul v-if= "true" class="list-inline-mb-0">
-            <li class="list-inline-item"><a href="#" class="btn btn-outline-light my-2">登陆</a></li>
-            <li class="list-inline-item"><a href="#" class="btn btn-outline-light my-2">注册</a></li>
+            <li class="list-inline-item"><router-link to="/login" class="btn btn-outline-light my-2">登陆</router-link></li>
+            <li class="list-inline-item"> <router-link to="/signup" class="btn btn-outline-light my-2">注册</router-link></li>
         </ul>
         <ul v-else class="list-inline-mb-0">
              <li class="list-inline-item">
@@ -14,17 +15,14 @@
                  </dropdown>
              </li>
         </ul>
+        </div>
     </nav>
 </template>
 <script lang="ts">
 import {defineComponent, PropType} from 'vue'
 import Dropdown from './Dropdown.vue'
 import DropdownItem from './DropdownItem.vue'
-export interface UserProps{
-    isLogin: boolean;
-    name?: string;
-    id?: number;
-}
+import { UserProps } from '../store/types'
 export default defineComponent({
     name:'GobalHeader',
     components:{
