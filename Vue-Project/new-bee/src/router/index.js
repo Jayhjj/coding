@@ -68,6 +68,11 @@ const routes = [
     path:'/setting',
     name:'setting',
     component:() => import('@/views/Setting.vue')
+  },
+  {
+    path:'/order-detail',
+    name:'order-detail',
+    component:() => import('@/views/OrderDetail.vue')
   }
 ]
 

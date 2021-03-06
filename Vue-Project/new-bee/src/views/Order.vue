@@ -18,7 +18,7 @@
           finished-text="没有更多了"
           @load="onLoad"
           >
-          <div class="order-item-box" v-for="(item,index) in list" :key="index">
+          <div class="order-item-box" v-for="(item,index) in list" :key="index" @click="goTo(item.orderNo)">
             <div class="order-item-header">
               <span>订单时间:{{item.createTime}}</span>
               <span>{{item.orderStatusString}}</span>
@@ -40,15 +40,17 @@
 </template>
 
 <script>
-import sHeader from "@/components/SimpleHeader";
-import { reactive, toRefs, onMounted } from 'vue';
+import sHeader from "@/components/SimpleHeader"
+import { reactive, toRefs, onMounted } from 'vue'
 import {getCart} from '@/service/cart.js'
 import {getOrderList} from '@/service/order.js'
+import {useRouter} from 'vue-router'
 export default {
     components: {
         sHeader
     },
     setup(){
+        const router = useRouter()
         const state = reactive({
           status:'',
           list:[],
@@ -98,11 +100,15 @@ export default {
           state.page = 1
           onLoad()
         }
+        const goTo = (id) => {
+          router.push({ path: '/order-detail', query: { id } })
+        }
         return{
           ...toRefs(state),
           onChangeTab,
           onRefresh,
-          onLoad
+          onLoad,
+          goTo
         }
     }
 }
