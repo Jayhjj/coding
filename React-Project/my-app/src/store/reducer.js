@@ -1,5 +1,6 @@
 //笔记本记载的东西(数据)
 //天生就可以拿到仓库数据
+import {CHANGEINPUT,ADDITEM,DELETEITEM,INIT_LIST_ACTION} from './actionTypes'
 const defaultState = {
     inputValue: 'Write Something',
     list: [
@@ -11,24 +12,29 @@ const defaultState = {
 
 export default (state = defaultState,action)=>{
     console.log(state,action)
-    if(action.type === 'changeInput'){
+    if(action.type === CHANGEINPUT){
         let newState = JSON.parse(JSON.stringify(state)) //深度拷贝state
         newState.inputValue = action.value
         return newState
     }
     //关键代码------------------start----------
     //state值只能传递，不能使用
-    if(action.type === 'addItem' ){ //根据type值，编写业务逻辑
+    if(action.type === ADDITEM ){ //根据type值，编写业务逻辑
         let newState = JSON.parse(JSON.stringify(state)) 
         newState.list.push(newState.inputValue)  //push新的内容到列表中去
         newState.inputValue = ''
         return newState
     }
      //关键代码------------------end----------
-    if(action.type === 'deleteItem'){
+    if(action.type === DELETEITEM){
         let newState = JSON.parse(JSON.stringify(state)) 
         newState.list.splice(action.index,1)
         return newState 
+    }
+    if(action.type === INIT_LIST_ACTION){
+        let newState = JSON.parse(JSON.stringify(state)) 
+        newState.list = action.data
+        return newState
     }
     return state
 }
