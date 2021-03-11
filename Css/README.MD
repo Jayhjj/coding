@@ -1,28 +1,13 @@
-置换元素
-```html
-    <img src ="">
-     <iframe src ="">
-    <canvas/>
-    <video src="">
-```
 
-不受css视觉模型控制,(css渲染规则则不考虑内部内容)
+# link标签和import标签的区别
+link 标签是html标签,@import是css提供的
+link会在页面加载的时候同时加载,@import引入的css会在页面加载完成后再加载
+link没有兼容性，@import必须IE5以上
+link的权重高于@import
 
-非置换元素
-```html
-    <div>
-        <div>
-        </div>
-    </div>
-```
+# transition 和 animation 的区别
+transition需要触发一个条件,animation不需要
+transition是2帧运行的,from...to,animation 是一帧一帧运行的
 
-css布局方案
-float
-position
-normal flow
-
-- inline-level-box  ifc (base-line)
-- block-level-box   bfc (清楚浮动，两栏布局)
-
-flex
-grid
+# flex布局
+传统布局 = 依赖display + position + float , 这种再特殊布局中非常不方便,不如垂直居中
