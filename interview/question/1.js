@@ -1,5 +1,5 @@
 var new_array = arr.map(function callback(currentValue,[index,[array]]) { 
-     }[ thisArg])
+}[ thisArg])
 
 
      ['1', '2', '3'].map(parseInt)
