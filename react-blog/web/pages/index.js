@@ -5,6 +5,9 @@ import { Row, Col ,List} from 'antd'
 import Header from '../components/Header'
 import {CalendarOutlined,FolderOutlined ,FireOutlined} from '@ant-design/icons';
 import '../static/style/pages/index.css'
+import Author from '../components/Author'
+import Advert from '../components/Advert'
+import Footer from '../components/Footer'
 const Home = () => {
   const [ mylist , setMylist ] = useState(
     [
@@ -39,10 +42,15 @@ const Home = () => {
           />
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-          右侧
+          <Author/>
+          <Advert /> 
+         
       </Col>
+      
       </Row>
+       <Footer/>
     </div>
+   
   )
 }
 
