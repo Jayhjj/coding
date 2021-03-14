@@ -1,5 +1,5 @@
-import {Divider, Avatar} from 'antd'
-import { GithubOutlined ,QqOutlined,WechatOutlined} from '@ant-design/icons';
+import {Divider, Avatar,Icon} from 'antd'
+// import { GithubOutlined ,QqOutlined,WechatOutlined} from '@ant-design/icons';
 import '../static/style/components/author.css'
 const Author = () => {
     return(
@@ -8,9 +8,9 @@ const Author = () => {
              <div className="author-introduction">
                  一个初入前端的大四毕业生,对前端技术有较大兴趣，希望能学习更多的前端知识，提升自己的编码能力
                  <Divider>社交账号</Divider>
-                 <Avatar size={35} icon={<GithubOutlined style={{ fontSize: '16px', color: '#08c' }}/>} className="account"></Avatar>
-                 <Avatar size={35} icon={<QqOutlined style={{ fontSize: '16px', color: '#08c' }}/>} className="account"></Avatar>
-                 <Avatar size={35} icon={<WechatOutlined style={{ fontSize: '16px', color: '#08c' }}/>} className="account"></Avatar>
+                 <Avatar size={35} icon={<Icon type="github" />} className="account"></Avatar>
+                 <Avatar size={35} icon={<Icon type="qq" />} className="account"></Avatar>
+                 <Avatar size={35} icon={<Icon type="wechat" />} className="account"></Avatar>
              </div>
         </div>
     )
