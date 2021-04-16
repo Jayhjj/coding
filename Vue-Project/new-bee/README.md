@@ -1,24 +1,6 @@
-# new-bee
+1. 对每个页面获取数据的接口进行封装，通过axios异步获取数据
 
-## Project setup
-```
-yarn install
-```
+2. 单独封装了一个组件,通过canvas生成随机验证码, 引用better-scroll封装了一个ListScroll组件,除了实时派发scroll事件，在swipe的情况下仍然能实时派发scroll事件
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+3. 封装了一个公共工具函数,通过LocalStorage的setTtem,和getItem进行Json数据的存取,比如token,并且地址界面可以通过封装的逻辑去拿到工具函数的省市区
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

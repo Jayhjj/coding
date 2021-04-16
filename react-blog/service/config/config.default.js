@@ -13,7 +13,7 @@ module.exports = appInfo => {
   const config = exports = {};
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1615473555598_1538';
+  config.keys = appInfo.name + '_1570612395695_7299';
 
   // add your middleware config here
   config.middleware = [];
@@ -34,7 +34,7 @@ module.exports = appInfo => {
       // password
       password: '123456',
       // database
-      database: 'react-blog',
+      database: 'react-blog',    
     },
     // load into app, default is open
     app: true,
@@ -43,17 +43,36 @@ module.exports = appInfo => {
   };
 
   config.security = {
-    csrf: {
-      enable: false
-    },
-    domainWhiteList: ['*']
-  };
+　　　　csrf: {enable: false},
+　　　　domainWhiteList: [ '*' ]
+　　};
+ 
   config.cors = {
-    origin: '*',
+    origin: 'http://127.0.0.1:3000',
+    credentials: true,  //允许Cook可以跨域
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
-  };
+    };
+  
+    //长文本设置
+    config.bodyParser = {
+      enable: true,
+      encoding: 'utf8',
+      formLimit: '5024kb',
+      jsonLimit: '5024kb',
+      strict: true,
+      // @see https://github.com/hapijs/qs/blob/master/lib/parse.js#L8 for more options
+      queryString: {
+        arrayLimit: 100,
+        depth: 5,
+        parameterLimit: 1000,
+      },
+  
+    }
+
   return {
     ...config,
     ...userConfig,
   };
 };
+
+

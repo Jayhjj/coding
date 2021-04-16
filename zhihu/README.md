@@ -6,3 +6,6 @@
 
 - 表单功能的封装
   使用一个vaildateInput的组件去做验证表单这件事，在页面显示那种错误信息
+
+
+- 下一步先写注册功能，然后封装axios,http文件夹,装vuex,从types.ts里面引入，先写GolobalDataProps

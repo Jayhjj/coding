@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <gobal-header :user="currentUser"></gobal-header>
+    <!-- <gobal-header :user="currentUser"></gobal-header> -->
     <!-- <column-list :list="list"></column-list> -->
     <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">

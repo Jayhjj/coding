@@ -33,7 +33,7 @@
                 return function () {
                     let current = Date.now;
                     if (current - pre >= wait) {
-                        func(this)
+                        func.apply(this)
                         pre = current;
                     }
                 }
